@@ -4,5 +4,5 @@ using System.Threading;
 
 public interface IMovementHandler
 {
-    UniTask Execute(List<PositionData> movementItems, CancellationToken token);
+    UniTask Execute(IEnumerable<PositionData> movementItems, CancellationToken token);
 }

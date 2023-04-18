@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 public class LevelSesstionController
 {
@@ -9,12 +9,15 @@ public class LevelSesstionController
     private readonly ISwipeHandler _swipeHandler;
     private readonly ISwapHandler _swapHandler;
     private readonly IMovementHandler _movementHandler;
-    private readonly List<PositionData> _positionList;
+    private readonly IDropHandler _dropHandler;
+    private readonly IDestroyHandler _destroyHandler;
 
     private UniTaskCompletionSource _nextButtonClickCompletionSource;
 
     public async UniTask Execute(CancellationToken token)
     {
+        var interactionPositionList = new List<PositionData>();
+
         _nextButtonClickCompletionSource = new UniTaskCompletionSource();
         var tokenRegistration = token.Register(CancelAwaingOfNextButtonClick);
 
@@ -27,7 +30,7 @@ public class LevelSesstionController
         {
             ActivateMenu();
 
-            await UniTask.WhenAny(HandlePlayerMove(token), _nextButtonClickCompletionSource.Task);
+            await UniTask.WhenAny(HandlePlayerMove(interactionPositionList, token), _nextButtonClickCompletionSource.Task);
 
             if (token.IsCancellationRequested || _nextButtonClickCompletionSource.Task.Status == UniTaskStatus.Succeeded)
             {
@@ -39,20 +42,15 @@ public class LevelSesstionController
             var isFieldNormalized = false;
             while (!isFieldNormalized)
             {
-                await DropBlocks(token);
+                await Normalize(interactionPositionList, token);
 
                 if (token.IsCancellationRequested)
                 {
                     break;
                 }
 
-                isFieldNormalized = await DestroyBlocks(token);
-
-                if (token.IsCancellationRequested)
-                {
-                    break;
-                }
             }
+
         }
 
         UnsubscribeFromMenu();
@@ -66,12 +64,7 @@ public class LevelSesstionController
         }
     }
 
-    private void DespawnPlayfield()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private async UniTask HandlePlayerMove(CancellationToken token)
+    private async UniTask HandlePlayerMove(List<PositionData> interactionPositionList, CancellationToken token)
     {
         var result = await _swipeHandler.Handle(token);
 
@@ -82,22 +75,51 @@ public class LevelSesstionController
 
         _swapHandler.Execute(result);
 
-        _positionList.Add(result.FromPosition);
-        _positionList.Add(result.ToPosition);
+        interactionPositionList.Add(result.FromPosition);
+        interactionPositionList.Add(result.ToPosition);
 
-        await _movementHandler.Execute(_positionList, token);
-
-        _positionList.Clear();
+        await _movementHandler.Execute(interactionPositionList, token);
     }
 
-    private Task DropBlocks(CancellationToken token)
+    private async UniTask<bool> Normalize(List<PositionData> interactionPositionList, CancellationToken token)
     {
-        throw new System.NotImplementedException();
+        var rowList = interactionPositionList.Select(position => position.I).Distinct();
+        var columnList = interactionPositionList.Select(position => position.J).Distinct();
+
+        interactionPositionList.Clear();
+
+        await DropBlocks(columnList, token);
+
+        if (token.IsCancellationRequested)
+        {
+            return false;
+        }
+
+        var positionOfDestroyedItems = await DestroyBlocks(rowList, columnList, token);
+
+        var isNothingDestroyed = positionOfDestroyedItems.Count() == 0;
+        if (!isNothingDestroyed)
+        {
+            foreach (var item in positionOfDestroyedItems)
+            {
+                interactionPositionList.Add(item);
+            }
+
+        }
+
+        return isNothingDestroyed;
     }
 
-    private Task<bool> DestroyBlocks(CancellationToken token)
+    private UniTask DropBlocks(IEnumerable<int> columnList, CancellationToken token)
     {
-        throw new System.NotImplementedException();
+        var positionList = _dropHandler.CalculateDropPositions(columnList);
+
+        return _movementHandler.Execute(positionList, token);
+    }
+
+    private async UniTask<IEnumerable<PositionData>> DestroyBlocks(IEnumerable<int> rowList, IEnumerable<int> columnList, CancellationToken token)
+    {
+        return await _destroyHandler.TryDestroyItems(rowList, columnList, token);
     }
 
     private void SpawnPlayfield()
@@ -133,5 +155,10 @@ public class LevelSesstionController
     private void DeactivateMenu()
     {
         _menuProvider.SetButtonActive(false);
+    }
+
+    private void DespawnPlayfield()
+    {
+        throw new System.NotImplementedException();
     }
 }
