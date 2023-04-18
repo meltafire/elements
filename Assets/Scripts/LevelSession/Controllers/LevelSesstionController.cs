@@ -1,10 +1,15 @@
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 public class LevelSesstionController
 {
     private readonly IMenuProvider _menuProvider;
+    private readonly ISwipeHandler _swipeHandler;
+    private readonly ISwapHandler _swapHandler;
+    private readonly IMovementHandler _movementHandler;
+    private readonly List<PositionData> _positionList;
 
     private UniTaskCompletionSource _nextButtonClickCompletionSource;
 
@@ -66,9 +71,23 @@ public class LevelSesstionController
         throw new System.NotImplementedException();
     }
 
-    private UniTask<object> HandlePlayerMove(CancellationToken token)
+    private async UniTask HandlePlayerMove(CancellationToken token)
     {
-        throw new System.NotImplementedException();
+        var result = await _swipeHandler.Handle(token);
+
+        if (token.IsCancellationRequested)
+        {
+            return;
+        }
+
+        _swapHandler.Execute(result);
+
+        _positionList.Add(result.FromPosition);
+        _positionList.Add(result.ToPosition);
+
+        await _movementHandler.Execute(_positionList, token);
+
+        _positionList.Clear();
     }
 
     private Task DropBlocks(CancellationToken token)
