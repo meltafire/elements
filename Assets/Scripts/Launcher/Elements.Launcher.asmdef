@@ -2,8 +2,9 @@
     "name": "Elements.Launcher",
     "rootNamespace": "",
     "references": [
-        "UniTask",
-        "Elements.PlayfieldScaler"
+        "Elements.Balloons",
+        "Elements.PlayfieldScaler",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

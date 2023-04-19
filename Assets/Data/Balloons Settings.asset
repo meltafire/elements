@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31019be6ce0a0484a922c336a46f5113, type: 3}
+  m_Name: Balloons Settings
+  m_EditorClassIdentifier: 
+  _maxBalloonOnScreen: 3
+  _maxSecondsBetweenSpawn: 3
+  _upperY: 5
+  _lowerY: -1
+  _sinAmpMax: 1.5
+  _sinAmpMin: 1
+  _speedMin: 1
+  _speedMax: 1.5
+  _depthDelta: 1
+  _sprites:
+  - {fileID: 21300000, guid: 1113748fd31e610479b75bf93a6b6f3a, type: 3}
+  - {fileID: 21300000, guid: daafe94ac0fd62b499e01a1c7684b968, type: 3}
