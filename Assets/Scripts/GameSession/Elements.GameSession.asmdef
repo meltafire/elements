@@ -1,0 +1,17 @@
+{
+    "name": "Elements.GameSession",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "Elements.Menu"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

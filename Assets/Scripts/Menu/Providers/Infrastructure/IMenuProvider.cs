@@ -1,7 +1,10 @@
 ﻿using System;
 
-public interface IMenuProvider
+namespace Elements.Menu.Providers.Infrastructure
 {
-    event Action OnNextButtonClick;
-    void SetButtonActive(bool isActive);
+    public interface IMenuProvider
+    {
+        event Action OnNextButtonClick;
+        void SetButtonActive(bool isActive);
+    }
 }
