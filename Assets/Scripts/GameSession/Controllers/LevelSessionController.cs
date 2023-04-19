@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Elements.GameSession.Controllers
 {
-    public class LevelSesstionController
+    public class LevelSessionController
     {
         private readonly IMenuProvider _menuProvider;
         private readonly ISwipeHandler _swipeHandler;

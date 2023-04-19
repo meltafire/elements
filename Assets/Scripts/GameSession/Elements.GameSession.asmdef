@@ -2,8 +2,9 @@
     "name": "Elements.GameSession",
     "rootNamespace": "",
     "references": [
+        "Elements.Menu",
         "UniTask",
-        "Elements.Menu"
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
