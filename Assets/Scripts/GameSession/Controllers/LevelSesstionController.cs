@@ -16,6 +16,8 @@ namespace Elements.GameSession.Controllers
         private readonly IMovementHandler _movementHandler;
         private readonly IDropHandler _dropHandler;
         private readonly IDestroyHandler _destroyHandler;
+        private readonly IGameEndRulesHandler _gameEndRulesHandler;
+        private readonly IPlayfieldSpawnerHelper _playfieldSpawnerHelper;
 
         private UniTaskCompletionSource _nextButtonClickCompletionSource;
 
@@ -56,6 +58,7 @@ namespace Elements.GameSession.Controllers
 
                 }
 
+                isGameEnded = _gameEndRulesHandler.CheckGameCompletion();
             }
 
             UnsubscribeFromMenu();
@@ -129,7 +132,7 @@ namespace Elements.GameSession.Controllers
 
         private void SpawnPlayfield()
         {
-            throw new System.NotImplementedException();
+            _playfieldSpawnerHelper.Spawn();
         }
 
         private void CancelAwaingOfNextButtonClick()
@@ -164,7 +167,7 @@ namespace Elements.GameSession.Controllers
 
         private void DespawnPlayfield()
         {
-            throw new System.NotImplementedException();
+            _playfieldSpawnerHelper.Despawn();
         }
     }
 }
