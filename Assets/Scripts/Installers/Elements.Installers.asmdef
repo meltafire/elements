@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "Elements.Launcher",
+        "Elements.PlayfieldScaler",
         "Zenject"
     ],
     "includePlatforms": [],

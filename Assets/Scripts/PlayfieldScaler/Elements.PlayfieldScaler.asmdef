@@ -1,10 +1,7 @@
 {
-    "name": "Elements.Launcher",
+    "name": "Elements.PlayfieldScaler",
     "rootNamespace": "",
-    "references": [
-        "UniTask",
-        "Elements.PlayfieldScaler"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
