@@ -1,0 +1,17 @@
+{
+    "name": "Elements.Installers",
+    "rootNamespace": "",
+    "references": [
+        "Elements.Launcher",
+        "Zenject"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
