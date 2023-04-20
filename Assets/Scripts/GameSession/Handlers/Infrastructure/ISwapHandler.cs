@@ -1,11 +1,11 @@
-﻿using Elements.GameSession.Data;
-using System.Collections.Generic;
+﻿using Elements.GameSession.Containers.Infrasrtucture;
+using Elements.GameSession.Data;
 
 namespace Elements.GameSession.Handlers.Infrastructure
 {
     public interface ISwapHandler
     {
-        void Execute(IEnumerable<SwapData> swapDatas);
         void Execute(SwapData swapData);
+        void Execute(IPositionContainer fromContainer, IPositionContainer toContainer);
     }
 }

@@ -1,21 +1,12 @@
 ﻿using Elements.GameSession.Containers.Infrasrtucture;
 using Elements.GameSession.Data;
 using Elements.GameSession.Handlers.Infrastructure;
-using System.Collections.Generic;
 
 namespace Elements.GameSession.Handlers.Implementation
 {
     public class SwapHandler : ISwapHandler
     {
-        private ILevelContainer _levelContainer;
-
-        public void Execute(IEnumerable<SwapData> swapDatas)
-        {
-            foreach (var data in swapDatas)
-            {
-                Execute(data);
-            }
-        }
+        private readonly ILevelContainer _levelContainer;
 
         public void Execute(SwapData swapData)
         {
@@ -26,6 +17,11 @@ namespace Elements.GameSession.Handlers.Implementation
             var fromContainer = containers[fromData.I, fromData.J];
             var toContainer = containers[toData.I, toData.J];
 
+            Execute(fromContainer, toContainer);
+        }
+
+        public void Execute(IPositionContainer fromContainer, IPositionContainer toContainer)
+        {
             var fromItem = fromContainer.ItemMediator;
             var toItem = toContainer.ItemMediator;
 
@@ -36,7 +32,7 @@ namespace Elements.GameSession.Handlers.Implementation
             RegisterAtNewPosition(toContainer);
         }
 
-        private static void RegisterAtNewPosition(IPositionContainer container)
+        private void RegisterAtNewPosition(IPositionContainer container)
         {
             if (!container.IsEmpty())
             {
