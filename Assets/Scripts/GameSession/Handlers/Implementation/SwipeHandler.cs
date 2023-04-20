@@ -2,7 +2,6 @@
 using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Data;
 using Elements.GameSession.Handlers.Infrastructure;
-using Elements.Tools;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Elements.GameSession.Handlers.Implementation
 {
     public class SwipeHandler : ISwipeHandler
     {
-        private readonly IUpdateProvider _swipeHelper;
         private readonly ILevelContainer _levelContainer;
 
         private UniTaskCompletionSource _firstItemSelectionTcs;
@@ -19,9 +17,8 @@ namespace Elements.GameSession.Handlers.Implementation
         private PositionData _finalPositionData;
         private Vector3 _swipeStartPosition;
 
-        public SwipeHandler(IUpdateProvider swipeHelper, ILevelContainer levelContainer)
+        public SwipeHandler(ILevelContainer levelContainer)
         {
-            _swipeHelper = swipeHelper;
             _levelContainer = levelContainer;
         }
 
@@ -64,11 +61,10 @@ namespace Elements.GameSession.Handlers.Implementation
 
                 _swipeStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                _swipeHelper.OnUpdate += OnUpdated;
-
-                await _firstItemSelectionTcs.Task;
-
-                _swipeHelper.OnUpdate -= OnUpdated;
+                while(_firstItemSelectionTcs.Task.Status == UniTaskStatus.Pending)
+                {
+                    await UniTask.Yield(PlayerLoopTiming.Update, token);
+                }
 
                 tokenRegistration.Dispose();
                 _firstItemSelectionTcs = null;
