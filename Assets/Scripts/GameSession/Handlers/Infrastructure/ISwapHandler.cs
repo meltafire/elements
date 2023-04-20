@@ -1,4 +1,4 @@
-﻿using Elements.GameSession.Containers.Infrasrtucture;
+﻿using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Data;
 
 namespace Elements.GameSession.Handlers.Infrastructure

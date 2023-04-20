@@ -3,7 +3,7 @@ using Elements.GameSession.Data;
 using System;
 using System.Threading;
 
-namespace Elements.GameSession.Containers.Infrasrtucture
+namespace Elements.GameSession.Containers.Infrastructure
 {
     public interface IItemMediator
     {
@@ -14,6 +14,7 @@ namespace Elements.GameSession.Containers.Infrasrtucture
         UniTask MoveView(CancellationToken token);
         UniTask PlayDestroyAnimation();
 
+        void CreateView(IPositionMediator positionMediator);
         void RegisterAtNewPosition(IPositionMediator positionMediator);
         void RemoveView();
     }

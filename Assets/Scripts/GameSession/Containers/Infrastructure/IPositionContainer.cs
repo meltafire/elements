@@ -1,8 +1,8 @@
-﻿namespace Elements.GameSession.Containers.Infrasrtucture
+﻿namespace Elements.GameSession.Containers.Infrastructure
 {
     public interface IPositionContainer
     {
-        IPositionMediator PositionMediator { get; set; }
+        IPositionMediator PositionMediator { get;}
         IItemMediator ItemMediator { get; set; }
 
         bool IsEmpty();

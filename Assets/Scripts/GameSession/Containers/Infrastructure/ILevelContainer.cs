@@ -1,6 +1,6 @@
-using Elements.GameSession.Containers.Infrasrtucture;
+using Elements.GameSession.Containers.Infrastructure;
 
-namespace Elements.GameSession.Handlers.Infrastructure
+namespace Elements.GameSession.Containers.Infrastructure
 {
     public interface ILevelContainer
     {
