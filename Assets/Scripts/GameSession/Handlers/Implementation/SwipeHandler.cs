@@ -64,6 +64,8 @@ namespace Elements.GameSession.Handlers.Implementation
                 while(_firstItemSelectionTcs.Task.Status == UniTaskStatus.Pending)
                 {
                     await UniTask.Yield(PlayerLoopTiming.Update, token);
+
+                    OnUpdated();
                 }
 
                 tokenRegistration.Dispose();

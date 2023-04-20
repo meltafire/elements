@@ -7,6 +7,6 @@ namespace Elements.GameSession.Handlers.Infrastructure
 {
     public interface IDestroyHandler
     {
-        UniTask<IEnumerable<PositionData>> TryDestroyItems(IEnumerable<int> rowsForCheck, IEnumerable<int> columnsForCheck, CancellationToken token);
+        UniTask<IEnumerable<PositionData>> TryDestroyItems(CancellationToken token);
     }
 }

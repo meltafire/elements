@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Elements.GameSession.Data;
 using Elements.GameSession.Handlers.Infrastructure;
 using Elements.Menu.Providers.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -69,7 +70,7 @@ namespace Elements.GameSession.Controllers
                 var isFieldNormalized = false;
                 while (!isFieldNormalized)
                 {
-                    await Normalize(interactionPositionList, token);
+                    isFieldNormalized = await Normalize(interactionPositionList, token);
 
                     if (token.IsCancellationRequested)
                     {
@@ -111,8 +112,8 @@ namespace Elements.GameSession.Controllers
 
         private async UniTask<bool> Normalize(List<PositionData> interactionPositionList, CancellationToken token)
         {
-            var columnList = interactionPositionList.Select(position => position.I).Distinct();
-            var rowList = interactionPositionList.Select(position => position.J).Distinct();
+            var columnList = interactionPositionList.GroupBy(data => data.I).Select(g => g.First()).Select(data => data.I).ToList();
+            var rowList = interactionPositionList.GroupBy(data => data.J).Select(g => g.First()).Select(data => data.J).ToList();
 
             interactionPositionList.Clear();
 
@@ -123,7 +124,7 @@ namespace Elements.GameSession.Controllers
                 return false;
             }
 
-            var positionOfDestroyedItems = await DestroyBlocks(rowList, columnList, token);
+            var positionOfDestroyedItems = await DestroyBlocks(token);
 
             var isNothingDestroyed = positionOfDestroyedItems.Count() == 0;
             if (!isNothingDestroyed)
@@ -145,9 +146,9 @@ namespace Elements.GameSession.Controllers
             return _movementHandler.Execute(positionList, token);
         }
 
-        private async UniTask<IEnumerable<PositionData>> DestroyBlocks(IEnumerable<int> rowList, IEnumerable<int> columnList, CancellationToken token)
+        private async UniTask<IEnumerable<PositionData>> DestroyBlocks(CancellationToken token)
         {
-            return await _destroyHandler.TryDestroyItems(rowList, columnList, token);
+            return await _destroyHandler.TryDestroyItems( token);
         }
 
         private void SpawnPlayfield()

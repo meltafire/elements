@@ -23,13 +23,13 @@ namespace Elements.GameSession.Handlers.Implementation
 
             foreach (var columnNumber in columnsForCheck)
             {
-                for (int i = 0; i < _levelContainer.DimensionI - 1; i++)
+                for (var i = 0; i < _levelContainer.DimensionJ - 1; i++)
                 {
                     var swapRequired = false;
-                    for (int j = 0; j < _levelContainer.DimensionI - i - 1; j++)
+                    for (var j = 0; j < _levelContainer.DimensionJ - i - 1; j++)
                     {
-                        var fromPositionContainer = positionContainers[j, columnNumber];
-                        var toPositionContainer = positionContainers[j + 1, columnNumber];
+                        var fromPositionContainer = positionContainers[columnNumber, j];
+                        var toPositionContainer = positionContainers[columnNumber, j + 1];
                         if (fromPositionContainer.IsEmpty() && !toPositionContainer.IsEmpty())
                         {
                             _swapHandler.Execute(fromPositionContainer, toPositionContainer);
@@ -43,11 +43,12 @@ namespace Elements.GameSession.Handlers.Implementation
                     {
                         break;
                     }
+
                 }
 
-                for (int i = 0; i < _levelContainer.DimensionI; i++)
+                for (var j = 0; j < _levelContainer.DimensionJ; j++)
                 {
-                    var container = positionContainers[i, columnNumber];
+                    var container = positionContainers[columnNumber, j];
                     if (!container.IsEmpty())
                     {
                         interactedItems.Add(container.PositionMediator.Data);

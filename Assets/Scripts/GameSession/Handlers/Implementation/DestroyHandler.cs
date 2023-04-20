@@ -21,15 +21,15 @@ namespace Elements.GameSession.Handlers.Implementation
             _interactedItems = new List<PositionData>();
         }
 
-        public async UniTask<IEnumerable<PositionData>> TryDestroyItems(IEnumerable<int> rowsForCheck, IEnumerable<int> columnsForCheck, CancellationToken token)
+        public async UniTask<IEnumerable<PositionData>> TryDestroyItems(CancellationToken token)
         {
             _interactedItems.Clear();
 
             var positionsToClear = new List<IPositionContainer>();
             var positionContainers = _levelContainer.PositionContainers;
 
-            CheckRows(rowsForCheck, positionsToClear, positionContainers);
-            CheckColumns(columnsForCheck, positionsToClear, positionContainers);
+            CheckRows(positionsToClear, positionContainers);
+            CheckColumns(positionsToClear, positionContainers);
 
             var positionsToClearCount = positionsToClear.Count;
             if (positionsToClearCount != 0)
@@ -38,7 +38,7 @@ namespace Elements.GameSession.Handlers.Implementation
 
                 for (int i = 0; i < positionsToClearCount; i++)
                 {
-                    animationTasks[i] = positionsToClear[i].ItemMediator.PlayDestroyAnimation();
+                    animationTasks[i] = positionsToClear[i].ItemMediator.PlayDestroyAnimation(token);
                 }
 
                 await UniTask.WhenAll(animationTasks);
@@ -59,9 +59,9 @@ namespace Elements.GameSession.Handlers.Implementation
             return _interactedItems;
         }
 
-        private void CheckRows(IEnumerable<int> rowsForCheck, List<IPositionContainer> positionsToClear, IPositionContainer[,] positionContainers)
+        private void CheckRows(List<IPositionContainer> positionsToClear, IPositionContainer[,] positionContainers)
         {
-            foreach (var rowNumber in rowsForCheck)
+            for(var rowNumber = 0; rowNumber < _levelContainer.DimensionJ; rowNumber++)
             {
                 var sameTypeCounter = 0;
                 var lastEncounteredType = ItemType.Empty;
@@ -104,9 +104,9 @@ namespace Elements.GameSession.Handlers.Implementation
             }
         }
 
-        private void CheckColumns(IEnumerable<int> columnsForCheck, List<IPositionContainer> positionsToClear, IPositionContainer[,] positionContainers)
+        private void CheckColumns(List<IPositionContainer> positionsToClear, IPositionContainer[,] positionContainers)
         {
-            foreach (var columnNumber in columnsForCheck)
+            for(var columnNumber = 0; columnNumber < _levelContainer.DimensionI; columnNumber++)
             {
                 var sameTypeCounter = 0;
                 var lastEncounteredType = ItemType.Empty;
