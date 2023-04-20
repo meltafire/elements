@@ -1,6 +1,6 @@
 ﻿using Elements.DataSource.Data;
 
-namespace Elements.GameSession.Data
+namespace Elements.DataSource.Data
 {
     public class Item
     {

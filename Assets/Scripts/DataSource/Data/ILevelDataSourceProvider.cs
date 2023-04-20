@@ -1,6 +1,4 @@
-﻿using Elements.GameSession.Data;
-
-namespace Elements.GameSession.Providers
+﻿namespace Elements.DataSource.Data
 {
     public interface ILevelDataSourceProvider
     {

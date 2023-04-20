@@ -1,13 +1,8 @@
 {
-    "name": "Elements.Installers",
+    "name": "Elements.DataSource",
     "rootNamespace": "",
     "references": [
-        "Elements.Balloons",
-        "Elements.DataSource",
-        "Elements.GameSession",
-        "Elements.Launcher",
-        "Elements.PlayfieldScaler",
-        "Zenject"
+        "Elements.DataSource.Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

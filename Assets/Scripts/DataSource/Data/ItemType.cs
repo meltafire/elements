@@ -1,4 +1,4 @@
-﻿namespace Elements.GameSession.Data
+﻿namespace Elements.DataSource.Data
 {
     public enum ItemType
     {

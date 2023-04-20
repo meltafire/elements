@@ -2,6 +2,8 @@
     "name": "Elements.GameSession",
     "rootNamespace": "",
     "references": [
+        "Elements.DataSource",
+        "Elements.DataSource.Data",
         "Elements.Menu",
         "Elements.Tools",
         "UniTask",
