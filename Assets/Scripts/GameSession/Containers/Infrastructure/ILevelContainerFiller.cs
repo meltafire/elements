@@ -2,6 +2,6 @@
 {
     public interface ILevelContainerFiller
     {
-        void Fill(IPositionContainer[,] itemContainer, int dimensionI, int dimensionJ);
+        void Fill(IPositionContainer[,] positionContainers, int dimensionI, int dimensionJ);
     }
 }
