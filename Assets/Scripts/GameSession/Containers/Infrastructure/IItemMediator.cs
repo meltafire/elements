@@ -13,7 +13,7 @@ namespace Elements.GameSession.Containers.Infrastructure
         ItemType ItemType { get; }
 
         UniTask MoveView(CancellationToken token);
-        UniTask PlayDestroyAnimation();
+        UniTask PlayDestroyAnimation(CancellationToken token);
 
         void CreateView();
         void RegisterAtNewPosition(IPositionMediator positionMediator);

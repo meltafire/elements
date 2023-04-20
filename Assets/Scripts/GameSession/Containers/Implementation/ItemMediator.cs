@@ -4,6 +4,7 @@ using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Views;
+using Elements.Tools;
 using System;
 using System.Threading;
 
@@ -11,6 +12,8 @@ namespace Elements.GameSession.Containers.Implementation
 {
     public class ItemMediator : IItemMediator, IDisposable
     {
+        private static string DesrtoyAnimationTrigger = "Destroy";
+
         private readonly ItemType _itemType;
         private readonly WaterItemViewFactory _waterItemViewFactory;
         private readonly FireItemViewFactory _fireItemViewFactory;
@@ -59,9 +62,13 @@ namespace Elements.GameSession.Containers.Implementation
             return _view.MoveToPosition(_positionMediator.Position, token);
         }
 
-        public UniTask PlayDestroyAnimation()
+        public UniTask PlayDestroyAnimation(CancellationToken token)
         {
-            throw new NotImplementedException();
+            _view.PlayAnimation(DesrtoyAnimationTrigger);
+
+            var animationLength = _view.Animator.GetCurrentAnimatorStateInfo(0).length;
+
+            return UniTask.Delay((int)(animationLength * Constants.MillisecondsInSeconds), false, PlayerLoopTiming.Update, token);
         }
 
         public void RemoveView()

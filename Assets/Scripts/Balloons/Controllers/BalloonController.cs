@@ -2,6 +2,7 @@
 using Elements.Balloons.Data;
 using Elements.Balloons.Handlers.Infrastructure;
 using Elements.Balloons.Views;
+using Elements.Tools;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -10,8 +11,6 @@ namespace Elements.Balloons.Controllers
 {
     public class BalloonController
     {
-        private const int SecondsToMilliseconds = 1000;
-
         private readonly IBalloonSpawnerHandler _spawnerHandler;
         private readonly BalloonsSettings _balloonsSettings;
         private readonly List<BalloonView> _views;
@@ -38,7 +37,7 @@ namespace Elements.Balloons.Controllers
                     break;
                 }
 
-                var timeUntielSpawnMs = (int)(Random.Range(0f, _balloonsSettings.MaxSecondsBetweenSpawn) * SecondsToMilliseconds);
+                var timeUntielSpawnMs = (int)(Random.Range(0f, _balloonsSettings.MaxSecondsBetweenSpawn) * Constants.MillisecondsInSeconds);
 
                 await UniTask.Delay(timeUntielSpawnMs, false, PlayerLoopTiming.Update, token);
 

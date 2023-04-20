@@ -6,6 +6,11 @@ namespace Elements.GameSession.Views
 {
     public class ItemView : MonoBehaviour
     {
+        [SerializeField]
+        private Animator _animator;
+
+        public Animator Animator => _animator;
+
         private bool _isMovementRequired = false;
         private Vector3 _movementTarget;
 
@@ -25,6 +30,11 @@ namespace Elements.GameSession.Views
             await UniTask.WaitUntil(CheckMovementCondition, PlayerLoopTiming.Update, token);
 
             _isMovementRequired = false;
+        }
+
+        public void PlayAnimation(string trigger)
+        {
+            _animator.SetTrigger(trigger);
         }
 
         public void Remove()

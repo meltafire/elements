@@ -1,11 +1,7 @@
 {
-    "name": "Elements.Balloons",
+    "name": "Elements.Tools",
     "rootNamespace": "",
-    "references": [
-        "Elements.Tools",
-        "UniTask",
-        "Zenject"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
