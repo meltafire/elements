@@ -6,6 +6,7 @@
         "Elements.DataSource",
         "Elements.GameSession",
         "Elements.Launcher",
+        "Elements.Menu",
         "Elements.PlayfieldScaler",
         "Zenject"
     ],
