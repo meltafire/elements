@@ -19,6 +19,7 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<MovementHandler>().AsTransient();
             Container.BindInterfacesTo<DropHandler>().AsTransient();
             Container.BindInterfacesTo<DestroyHandler>().AsTransient();
+            Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
 
             Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
         }
