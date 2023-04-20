@@ -1,12 +1,7 @@
 {
-    "name": "Elements.GameSession",
+    "name": "Elements.Tools",
     "rootNamespace": "",
-    "references": [
-        "Elements.Menu",
-        "Elements.Tools",
-        "UniTask",
-        "Zenject"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
