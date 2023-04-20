@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "Elements.Balloons",
+        "Elements.GameSession",
         "Elements.Launcher",
         "Elements.PlayfieldScaler",
         "Zenject"

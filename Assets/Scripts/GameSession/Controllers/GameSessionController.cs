@@ -8,9 +8,14 @@ namespace Elements.GameSession.Controllers
     {
         private readonly LevelSessionControllerFactory _levelSessionControllerFactory;
 
-        public async UniTask Execute(CancellationToken token)
+        public GameSessionController(LevelSessionControllerFactory levelSessionControllerFactory)
         {
+            _levelSessionControllerFactory = levelSessionControllerFactory;
+        }
 
+        public UniTask Execute(CancellationToken token)
+        {
+            return UniTask.CompletedTask;
         }
     }
 }

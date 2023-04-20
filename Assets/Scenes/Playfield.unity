@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 1086093047}
   - component: {fileID: 1086093050}
   - component: {fileID: 1086093051}
+  - component: {fileID: 1086093052}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -639,6 +640,7 @@ MonoBehaviour:
   - {fileID: 1086093047}
   - {fileID: 1086093050}
   - {fileID: 1086093051}
+  - {fileID: 1086093052}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -700,6 +702,18 @@ MonoBehaviour:
   _parrentTransform: {fileID: 1080566189}
   _prefab: {fileID: 7821692326047461140, guid: e8024535897c50b43b840ddf32696934, type: 3}
   _balloonsSettings: {fileID: 11400000, guid: e0ac40fc6e092ec429a513445b2a9b2e, type: 2}
+--- !u!114 &1086093052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086093046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b1f64496cb2e942ab2f430d7843cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1326257628
 GameObject:
   m_ObjectHideFlags: 0
