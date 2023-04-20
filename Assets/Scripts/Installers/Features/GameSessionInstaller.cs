@@ -1,12 +1,18 @@
 ﻿using Elements.GameSession.Controllers;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
+using UnityEngine;
 using Zenject;
 
 namespace Elements.Installers.Features
 {
     public class GameSessionInstaller : MonoInstaller
     {
+        [SerializeField]
+        private Transform _playfieldItemsTransform;
+        [SerializeField]
+        private GameObject _position;
+
         public override void InstallBindings()
         {
             Container.Bind<GameSessionController>().AsTransient();
@@ -22,6 +28,11 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
 
             Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
+
+            Container
+                .BindFactory<PositionView, PositionViewFactory>()
+                .FromComponentInNewPrefab(_position)
+                .UnderTransform(_playfieldItemsTransform);
         }
     }
 }

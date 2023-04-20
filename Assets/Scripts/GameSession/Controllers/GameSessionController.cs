@@ -4,6 +4,7 @@ using Elements.DataSource.Data;
 using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Factories;
+using Elements.GameSession.Handlers.Implementation;
 using Elements.GameSession.Handlers.Infrastructure;
 using System.Threading;
 using Zenject;
@@ -40,6 +41,7 @@ namespace Elements.GameSession.Controllers
                 var levelContainer = new LevelContainer();
                 _diContainer.Bind<ILevelContainer>().FromInstance(levelContainer);
                 _diContainer.Bind<ILevelContainerFiller>().FromInstance(levelContainer);
+                _diContainer.Bind<IPlayfiedPositioningHandler>().To<PlayfiedPositioningHandler>().AsCached();
 
                 var levelSessionController = _levelSessionControllerFactory.Create();
 
@@ -48,6 +50,7 @@ namespace Elements.GameSession.Controllers
                 _diContainer.Unbind<ILevelDataSourceProvider>();
                 _diContainer.Unbind<ILevelContainer>();
                 _diContainer.Unbind<ILevelContainerFiller>();
+                _diContainer.Unbind<IPlayfiedPositioningHandler>();
 
                 _gameSessionDataHandler.ItterateToNextLevel();
             }
