@@ -720,6 +720,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playfieldItemsTransform: {fileID: 650572719}
   _position: {fileID: 4578060802873934202, guid: 513f816414b52cf4a83ba64cc9d37167, type: 3}
+  _firePrefab: {fileID: 4445247636383575548, guid: 7206ca6a61b0aec42ad9efb328693832, type: 3}
+  _waterPrefab: {fileID: 6366124342246833355, guid: 1d8febbfdf78e5143bbad6df793bba80, type: 3}
 --- !u!114 &1086093053
 MonoBehaviour:
   m_ObjectHideFlags: 0
