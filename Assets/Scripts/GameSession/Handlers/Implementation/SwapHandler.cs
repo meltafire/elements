@@ -8,6 +8,11 @@ namespace Elements.GameSession.Handlers.Implementation
     {
         private readonly ILevelContainer _levelContainer;
 
+        public SwapHandler(ILevelContainer levelContainer)
+        {
+            _levelContainer = levelContainer;
+        }
+
         public void Execute(SwapData swapData)
         {
             var containers = _levelContainer.PositionContainers;

@@ -13,7 +13,13 @@ namespace Elements.GameSession.Handlers.Implementation
         private const int ItemsToMatchCount = 3;
 
         private readonly ILevelContainer _levelContainer;
-        private readonly List<PositionData> _interactedItems = new List<PositionData>();
+        private readonly List<PositionData> _interactedItems;
+
+        public DestroyHandler(ILevelContainer levelContainer)
+        {
+            _levelContainer = levelContainer;
+            _interactedItems = new List<PositionData>();
+        }
 
         public async UniTask<IEnumerable<PositionData>> TryDestroyItems(IEnumerable<int> rowsForCheck, IEnumerable<int> columnsForCheck, CancellationToken token)
         {

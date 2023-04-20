@@ -10,6 +10,12 @@ namespace Elements.GameSession.Handlers.Implementation
         private readonly ILevelContainer _levelContainer;
         private readonly ISwapHandler _swapHandler;
 
+        public DropHandler(ILevelContainer levelContainer, ISwapHandler swapHandler)
+        {
+            _levelContainer = levelContainer;
+            _swapHandler = swapHandler;
+        }
+
         public IEnumerable<PositionData> CalculateDropPositions(IEnumerable<int> columnsForCheck)
         {
             var interactedItems = new List<PositionData>();

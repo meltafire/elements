@@ -15,6 +15,12 @@ namespace Elements.Installers.Features
 
             Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
             Container.BindInterfacesTo<SwipeHandler>().AsTransient();
+            Container.BindInterfacesTo<SwapHandler>().AsTransient();
+            Container.BindInterfacesTo<MovementHandler>().AsTransient();
+            Container.BindInterfacesTo<DropHandler>().AsTransient();
+            Container.BindInterfacesTo<DestroyHandler>().AsTransient();
+
+            Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
         }
     }
 }

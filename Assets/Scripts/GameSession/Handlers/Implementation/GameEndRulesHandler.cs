@@ -7,6 +7,11 @@ namespace Elements.GameSession.Handlers.Implementation
     {
         private readonly ILevelContainer _levelContainer;
 
+        public GameEndRulesHandler(ILevelContainer levelContainer)
+        {
+            _levelContainer = levelContainer;
+        }
+
         public bool CheckGameCompletion()
         {
             var containers = _levelContainer.PositionContainers;

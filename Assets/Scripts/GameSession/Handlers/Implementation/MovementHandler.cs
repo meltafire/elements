@@ -5,7 +5,7 @@ using Elements.GameSession.Handlers.Infrastructure;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Elements.Scripts.GameSession.Handlers.Implementation
+namespace Elements.GameSession.Handlers.Implementation
 {
     public class MovementHandler : IMovementHandler
     {
@@ -13,6 +13,11 @@ namespace Elements.Scripts.GameSession.Handlers.Implementation
 
         private bool _isMovingOngoing;
         private List<UniTask> _movementTasks = new List<UniTask>();
+
+        public MovementHandler(ILevelContainer levelContainer)
+        {
+            _levelContainer = levelContainer;
+        }
 
         public async UniTask Execute(IEnumerable<PositionData> movementItems, CancellationToken token)
         {
