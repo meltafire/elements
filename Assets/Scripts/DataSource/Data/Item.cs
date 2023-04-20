@@ -1,7 +1,8 @@
-﻿using Elements.DataSource.Data;
+﻿using System;
 
 namespace Elements.DataSource.Data
 {
+    [Serializable]
     public class Item
     {
         public ItemType ItemType;
