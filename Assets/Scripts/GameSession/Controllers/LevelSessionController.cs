@@ -29,8 +29,7 @@ namespace Elements.GameSession.Controllers
             IDropHandler dropHandler,
             IDestroyHandler destroyHandler,
             IGameEndRulesHandler gameEndRulesHandler,
-            IPlayfieldSpawnerHelper playfieldSpawnerHelper,
-            UniTaskCompletionSource nextButtonClickCompletionSource)
+            IPlayfieldSpawnerHelper playfieldSpawnerHelper)
         {
             _menuProvider = menuProvider;
             _swipeHandler = swipeHandler;
@@ -40,7 +39,6 @@ namespace Elements.GameSession.Controllers
             _destroyHandler = destroyHandler;
             _gameEndRulesHandler = gameEndRulesHandler;
             _playfieldSpawnerHelper = playfieldSpawnerHelper;
-            _nextButtonClickCompletionSource = nextButtonClickCompletionSource;
         }
 
         public async UniTask Execute(CancellationToken token)
