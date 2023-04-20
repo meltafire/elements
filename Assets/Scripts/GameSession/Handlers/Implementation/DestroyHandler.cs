@@ -12,9 +12,12 @@ namespace Elements.GameSession.Handlers.Implementation
         private const int ItemsToMatchCount = 3;
 
         private readonly ILevelContainer _levelContainer;
+        private readonly List<PositionData> _interactedItems = new List<PositionData>();
 
         public async UniTask<IEnumerable<PositionData>> TryDestroyItems(IEnumerable<int> rowsForCheck, IEnumerable<int> columnsForCheck, CancellationToken token)
         {
+            _interactedItems.Clear();
+
             var positionsToClear = new List<IPositionContainer>();
             var positionContainers = _levelContainer.PositionContainers;
 
@@ -39,12 +42,14 @@ namespace Elements.GameSession.Handlers.Implementation
 
                     positionToClear.ItemMediator.RemoveView();
                     positionToClear.ItemMediator = null;
+
+                    _interactedItems.Add(positionToClear.PositionMediator.Data);
                 }
 
-                return positionContainers;
+                return _interactedItems;
             }
 
-            return null;
+            return _interactedItems;
         }
 
         private void CheckRows(IEnumerable<int> rowsForCheck, List<IPositionContainer> positionsToClear, IPositionContainer[,] positionContainers)
