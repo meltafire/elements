@@ -15,8 +15,9 @@ namespace Elements.GameSession.Containers.Infrastructure
         UniTask MoveView(CancellationToken token);
         UniTask PlayDestroyAnimation();
 
-        void CreateView(IPositionMediator positionMediator);
+        void CreateView();
         void RegisterAtNewPosition(IPositionMediator positionMediator);
+        void MoveToPositionImediately();
         void RemoveView();
     }
 }

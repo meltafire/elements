@@ -3,6 +3,7 @@ using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Controllers;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
+using Elements.GameSession.Views;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,10 @@ namespace Elements.Installers.Features
         private Transform _playfieldItemsTransform;
         [SerializeField]
         private GameObject _position;
+        [SerializeField]
+        private GameObject _firePrefab;
+        [SerializeField]
+        private GameObject _waterPrefab;
 
         public override void InstallBindings()
         {
@@ -37,6 +42,16 @@ namespace Elements.Installers.Features
             Container
                 .BindFactory<PositionView, PositionViewFactory>()
                 .FromComponentInNewPrefab(_position)
+                .UnderTransform(_playfieldItemsTransform);
+
+            Container
+                .BindFactory<ItemView, FireItemViewFactory>()
+                .FromComponentInNewPrefab(_firePrefab)
+                .UnderTransform(_playfieldItemsTransform);
+
+            Container
+                .BindFactory<ItemView, WaterItemViewFactory>()
+                .FromComponentInNewPrefab(_waterPrefab)
                 .UnderTransform(_playfieldItemsTransform);
         }
     }

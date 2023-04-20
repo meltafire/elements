@@ -2,6 +2,7 @@
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
+using Elements.GameSession.Views;
 using System;
 
 namespace Elements.GameSession.Containers.Implementation
@@ -15,6 +16,7 @@ namespace Elements.GameSession.Containers.Implementation
         private PositionView _view;
 
         public PositionData Data => _data;
+        public UnityEngine.Vector3 Position => _view.Position;
 
         public event Action<PositionData> OnItemClick;
 

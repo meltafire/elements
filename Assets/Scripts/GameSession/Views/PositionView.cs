@@ -1,24 +1,27 @@
 using System;
 using UnityEngine;
 
-public class PositionView : MonoBehaviour
+namespace Elements.GameSession.Views
 {
-    public event Action OnClick;
-
-    public Vector3 Position => transform.position;
-
-    private void OnMouseDown()
+    public class PositionView : MonoBehaviour
     {
-        OnClick?.Invoke();
-    }
+        public event Action OnClick;
 
-    public void SetPosition(Vector3 position)
-    {
-        transform.localPosition = position;
-    }
+        public Vector3 Position => transform.position;
 
-    public void Remove()
-    {
-        Destroy(gameObject);
+        private void OnMouseDown()
+        {
+            OnClick?.Invoke();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            transform.localPosition = position;
+        }
+
+        public void Remove()
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -53,7 +53,9 @@ namespace Elements.GameSession.Handlers.Implementation
                 var container = itemContainers[item.I, item.J];
 
                 var mediator = _itemMediatorFactory.Create(item.ItemType);
-                mediator.CreateView(container.PositionMediator);
+                mediator.CreateView();
+                mediator.RegisterAtNewPosition(container.PositionMediator);
+                mediator.MoveToPositionImediately();
 
                 container.ItemMediator = mediator;
             }

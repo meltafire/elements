@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Elements.GameSession.Factories
 {
-    public class PositionViewFactory: PlaceholderFactory<PositionView>
+    public class WaterItemViewFactory : PlaceholderFactory<ItemView>
     {
     }
 }
