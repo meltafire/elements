@@ -21,6 +21,28 @@ namespace Elements.GameSession.Controllers
 
         private UniTaskCompletionSource _nextButtonClickCompletionSource;
 
+        public LevelSessionController(
+            IMenuProvider menuProvider,
+            ISwipeHandler swipeHandler,
+            ISwapHandler swapHandler,
+            IMovementHandler movementHandler,
+            IDropHandler dropHandler,
+            IDestroyHandler destroyHandler,
+            IGameEndRulesHandler gameEndRulesHandler,
+            IPlayfieldSpawnerHelper playfieldSpawnerHelper,
+            UniTaskCompletionSource nextButtonClickCompletionSource)
+        {
+            _menuProvider = menuProvider;
+            _swipeHandler = swipeHandler;
+            _swapHandler = swapHandler;
+            _movementHandler = movementHandler;
+            _dropHandler = dropHandler;
+            _destroyHandler = destroyHandler;
+            _gameEndRulesHandler = gameEndRulesHandler;
+            _playfieldSpawnerHelper = playfieldSpawnerHelper;
+            _nextButtonClickCompletionSource = nextButtonClickCompletionSource;
+        }
+
         public async UniTask Execute(CancellationToken token)
         {
             var interactionPositionList = new List<PositionData>();
