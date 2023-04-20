@@ -9,8 +9,12 @@ namespace Elements.GameSession.Containers.Infrasrtucture
     {
         event Action<PositionData> OnItemSelect;
 
+        ItemType ItemType { get; }
+
         UniTask MoveView(CancellationToken token);
+        UniTask PlayDestroyAnimation();
 
         void RegisterAtNewPosition(IPositionMediator positionMediator);
+        void RemoveView();
     }
 }

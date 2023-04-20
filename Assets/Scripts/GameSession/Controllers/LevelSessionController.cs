@@ -91,8 +91,8 @@ namespace Elements.GameSession.Controllers
 
         private async UniTask<bool> Normalize(List<PositionData> interactionPositionList, CancellationToken token)
         {
-            var rowList = interactionPositionList.Select(position => position.I).Distinct();
-            var columnList = interactionPositionList.Select(position => position.J).Distinct();
+            var columnList = interactionPositionList.Select(position => position.I).Distinct();
+            var rowList = interactionPositionList.Select(position => position.J).Distinct();
 
             interactionPositionList.Clear();
 
