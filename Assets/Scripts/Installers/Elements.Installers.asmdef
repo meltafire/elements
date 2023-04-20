@@ -4,6 +4,7 @@
     "references": [
         "Elements.Balloons",
         "Elements.DataSource",
+        "Elements.DataSource.Data",
         "Elements.GameSession",
         "Elements.Launcher",
         "Elements.Menu",

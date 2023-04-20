@@ -1,4 +1,5 @@
-﻿using Elements.GameSession.Containers.Implementation;
+﻿using Elements.DataSource.Data;
+using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Controllers;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
@@ -31,6 +32,7 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
 
             Container.BindFactory<int, int, PositionMediator, PositionMediatorFactory>();
+            Container.BindFactory<ItemType, ItemMediator, ItemMediatorFactory>();
 
             Container
                 .BindFactory<PositionView, PositionViewFactory>()
