@@ -19,6 +19,12 @@ namespace Elements.GameSession.Handlers.Implementation
         private PositionData _finalPositionData;
         private Vector3 _swipeStartPosition;
 
+        public SwipeHandler(IUpdateProvider swipeHelper, ILevelContainer levelContainer)
+        {
+            _swipeHelper = swipeHelper;
+            _levelContainer = levelContainer;
+        }
+
         public async UniTask<SwapData> Handle(CancellationToken token)
         {
             var isSolutionFound = false;

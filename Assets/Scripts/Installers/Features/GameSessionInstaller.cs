@@ -11,9 +11,10 @@ namespace Elements.Installers.Features
         {
             Container.Bind<GameSessionController>().AsTransient();
 
-            Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
-
             Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>();
+
+            Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
+            Container.BindInterfacesTo<SwipeHandler>().AsTransient();
         }
     }
 }
