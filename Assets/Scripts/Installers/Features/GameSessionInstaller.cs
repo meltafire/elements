@@ -1,4 +1,5 @@
-﻿using Elements.GameSession.Controllers;
+﻿using Elements.GameSession.Containers.Implementation;
+using Elements.GameSession.Controllers;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
 using UnityEngine;
@@ -28,6 +29,8 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
 
             Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
+
+            Container.BindFactory<int, int, PositionMediator, PositionMediatorFactory>();
 
             Container
                 .BindFactory<PositionView, PositionViewFactory>()
