@@ -15,6 +15,20 @@ namespace Elements.GameSession.Handlers.Implementation
         private readonly PositionMediatorFactory _positionMediatorFactory;
         private readonly ItemMediatorFactory _itemMediatorFactory;
 
+        public PlayfieldSpawnerHelper(
+            ILevelContainer levelContainer,
+            ILevelContainerFiller levelContainerFiller,
+            ILevelDataSourceProvider dataSourceProvider,
+            PositionMediatorFactory positionMediatorFactory,
+            ItemMediatorFactory itemMediatorFactory)
+        {
+            _levelContainer = levelContainer;
+            _levelContainerFiller = levelContainerFiller;
+            _dataSourceProvider = dataSourceProvider;
+            _positionMediatorFactory = positionMediatorFactory;
+            _itemMediatorFactory = itemMediatorFactory;
+        }
+
         public void Spawn()
         {
             var fieldSizeI = _dataSourceProvider.FieldSizeI;

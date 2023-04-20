@@ -1,5 +1,6 @@
 ﻿using Elements.GameSession.Controllers;
 using Elements.GameSession.Factories;
+using Elements.GameSession.Handlers.Implementation;
 using Zenject;
 
 namespace Elements.Installers.Features
@@ -9,6 +10,8 @@ namespace Elements.Installers.Features
         public override void InstallBindings()
         {
             Container.Bind<GameSessionController>().AsTransient();
+
+            Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
 
             Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>();
         }
