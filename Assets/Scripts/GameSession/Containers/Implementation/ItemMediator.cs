@@ -12,8 +12,6 @@ namespace Elements.GameSession.Containers.Implementation
 {
     public class ItemMediator : IItemMediator, IDisposable
     {
-        private static string DesrtoyAnimationTrigger = "Destroy";
-
         private readonly ItemType _itemType;
         private readonly WaterItemViewFactory _waterItemViewFactory;
         private readonly FireItemViewFactory _fireItemViewFactory;
@@ -59,12 +57,12 @@ namespace Elements.GameSession.Containers.Implementation
 
         public UniTask MoveView(CancellationToken token)
         {
-            return _view.MoveToPosition(_positionMediator.Position, token);
+            return _view.MoveToPosition(_positionMediator.Position, Constants.MovementSpeed, token);
         }
 
         public UniTask PlayDestroyAnimation(CancellationToken token)
         {
-            _view.PlayAnimation(DesrtoyAnimationTrigger);
+            _view.PlayAnimation(Constants.DesrtoyAnimationTrigger);
 
             var animationLength = _view.Animator.GetCurrentAnimatorStateInfo(0).length;
 

@@ -83,7 +83,11 @@ namespace Elements.GameSession.Controllers
             }
 
             UnsubscribeFromMenu();
-            DeactivateMenu();
+
+            if (!token.IsCancellationRequested)
+            {
+                DeactivateMenu();
+            }
 
             tokenRegistration.Dispose();
 
@@ -147,7 +151,7 @@ namespace Elements.GameSession.Controllers
 
         private async UniTask<IEnumerable<PositionData>> DestroyBlocks(CancellationToken token)
         {
-            return await _destroyHandler.TryDestroyItems( token);
+            return await _destroyHandler.TryDestroyItems(token);
         }
 
         private void SpawnPlayfield()

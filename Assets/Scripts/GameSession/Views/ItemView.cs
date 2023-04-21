@@ -13,26 +13,28 @@ namespace Elements.GameSession.Views
 
         private bool _isMovementRequired = false;
         private Vector3 _movementTarget;
+        private float _speed;
 
         private void Update()
         {
             if (_isMovementRequired)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _movementTarget, Time.deltaTime * 1);
+                transform.position = Vector3.MoveTowards(transform.position, _movementTarget, Time.deltaTime * _speed);
             }
         }
 
-        public async UniTask MoveToPosition(Vector3 position, CancellationToken token)
+        public async UniTask MoveToPosition(Vector3 position, float speed, CancellationToken token)
         {
             _movementTarget = position;
             _isMovementRequired = true;
+            _speed = speed;
 
             await UniTask.WaitUntil(CheckMovementCondition, PlayerLoopTiming.Update, token);
 
             _isMovementRequired = false;
         }
 
-        public void PlayAnimation(string trigger)
+        public void PlayAnimation(int trigger)
         {
             _animator.SetTrigger(trigger);
         }
