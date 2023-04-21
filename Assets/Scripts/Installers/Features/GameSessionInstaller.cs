@@ -33,8 +33,7 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<DropHandler>().AsTransient();
             Container.BindInterfacesTo<DestroyHandler>().AsTransient();
             Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
-
-            Container.BindInterfacesTo<GameEndRulesHandler>().AsCached();
+            Container.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
 
             Container.BindFactory<int, int, PositionMediator, PositionMediatorFactory>();
             Container.BindFactory<ItemType, ItemMediator, ItemMediatorFactory>();

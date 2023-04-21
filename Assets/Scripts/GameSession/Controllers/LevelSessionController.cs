@@ -113,7 +113,6 @@ namespace Elements.GameSession.Controllers
         private async UniTask<bool> Normalize(List<PositionData> interactionPositionList, CancellationToken token)
         {
             var columnList = interactionPositionList.GroupBy(data => data.I).Select(g => g.First()).Select(data => data.I).ToList();
-            var rowList = interactionPositionList.GroupBy(data => data.J).Select(g => g.First()).Select(data => data.J).ToList();
 
             interactionPositionList.Clear();
 
