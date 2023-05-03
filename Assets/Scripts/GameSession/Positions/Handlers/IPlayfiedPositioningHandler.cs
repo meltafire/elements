@@ -5,6 +5,6 @@ namespace Elements.GameSession.Handlers.Infrastructure
 {
     public interface IPlayfiedPositioningHandler
     {
-        Vector3 GeneratePosition(PositionData data);
+        Vector3 GeneratePosition(int fieldSizeI, PositionData data);
     }
 }

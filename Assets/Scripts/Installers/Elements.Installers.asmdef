@@ -6,6 +6,7 @@
         "Elements.DataSource",
         "Elements.DataSource.Data",
         "Elements.GameSession",
+        "Elements.GameSession.Positions",
         "Elements.Launcher",
         "Elements.Menu",
         "Elements.PlayfieldScaler",

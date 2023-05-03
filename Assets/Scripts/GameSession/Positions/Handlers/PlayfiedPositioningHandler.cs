@@ -1,5 +1,4 @@
-﻿using Elements.DataSource.Data;
-using Elements.GameSession.Data;
+﻿using Elements.GameSession.Data;
 using Elements.GameSession.Handlers.Infrastructure;
 using UnityEngine;
 
@@ -13,18 +12,11 @@ namespace Elements.GameSession.Handlers.Implementation
         private const float BlockUnitSize = 1f;
         private const float BlockLowerBorderJ = 0f;
 
-        private readonly ILevelDataSourceProvider _levelDataSourceProvider;
-
-        public PlayfiedPositioningHandler(ILevelDataSourceProvider levelDataSourceProvider)
+        public Vector3 GeneratePosition(int fieldSizeI, PositionData data)
         {
-            _levelDataSourceProvider = levelDataSourceProvider;
-        }
+            var isDimensionIEven = fieldSizeI % 2 == 0;
 
-        public Vector3 GeneratePosition(PositionData data)
-        {
-            var isDimensionIEven = _levelDataSourceProvider.FieldSizeI % 2 == 0;
-
-            var halfOfItemCountI = _levelDataSourceProvider.FieldSizeI / 2;
+            var halfOfItemCountI = fieldSizeI / 2;
             var loverLeftCornerX = CenterOfScreenX - halfOfItemCountI * BlockUnitSize;
 
             var positionX = isDimensionIEven ? (loverLeftCornerX + data.I * BlockUnitSize + (BlockUnitSize / 2f)) : (loverLeftCornerX + data.I * BlockUnitSize);

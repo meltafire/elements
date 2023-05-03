@@ -2,6 +2,7 @@
     "name": "Elements.GameSession.Positions",
     "rootNamespace": "",
     "references": [
+        "Elements.DataSource.Data",
         "UniTask",
         "Zenject"
     ],

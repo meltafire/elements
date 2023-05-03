@@ -1,4 +1,5 @@
-﻿using Elements.GameSession.Containers.Infrastructure;
+﻿using Elements.DataSource.Data;
+using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
@@ -12,6 +13,7 @@ namespace Elements.GameSession.Containers.Implementation
         private readonly PositionData _data;
         private readonly IPlayfiedPositioningHandler _positioningHandler;
         private readonly PositionViewFactory _positionViewFactory;
+        private readonly ILevelDataSourceProvider _levelDataSourceProvider;
 
         private PositionView _view;
 
@@ -23,11 +25,13 @@ namespace Elements.GameSession.Containers.Implementation
         public PositionController(
             PositionViewFactory positionViewFactory,
             IPlayfiedPositioningHandler positioningHandler,
-            PositionData data)
+            PositionData data,
+            ILevelDataSourceProvider levelDataSourceProvider)
         {
             _positionViewFactory = positionViewFactory;
             _positioningHandler = positioningHandler;
             _data = data;
+            _levelDataSourceProvider = levelDataSourceProvider;
         }
 
         public void InitializeData(int i, int j)
@@ -77,7 +81,7 @@ namespace Elements.GameSession.Containers.Implementation
 
         private void AllignView()
         {
-            var position = _positioningHandler.GeneratePosition(_data);
+            var position = _positioningHandler.GeneratePosition(_levelDataSourceProvider.FieldSizeI, _data);
             _view.SetPosition(position);
         }
     }
