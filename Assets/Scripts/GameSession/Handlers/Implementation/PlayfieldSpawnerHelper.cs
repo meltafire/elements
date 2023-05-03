@@ -40,7 +40,9 @@ namespace Elements.GameSession.Handlers.Implementation
             {
                 for (int j = 0; j < fieldSizeJ; j++)
                 {
-                    var mediator = _positionMediatorFactory.Create(i, j);
+                    var mediator = _positionMediatorFactory.Create();
+
+                    mediator.InitializeData(i, j);
                     mediator.CreateView();
 
                     itemContainers[i, j] = new PositionContainer(mediator);

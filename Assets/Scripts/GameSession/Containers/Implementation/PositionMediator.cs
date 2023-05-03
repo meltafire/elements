@@ -21,15 +21,18 @@ namespace Elements.GameSession.Containers.Implementation
         public event Action<PositionData> OnItemClick;
 
         public PositionMediator(
-            int positionI,
-            int positionJ,
             PositionViewFactory positionViewFactory,
-            IPlayfiedPositioningHandler positioningHandler)
+            IPlayfiedPositioningHandler positioningHandler,
+            PositionData data)
         {
             _positionViewFactory = positionViewFactory;
             _positioningHandler = positioningHandler;
+            _data = data;
+        }
 
-            _data = new PositionData(positionI, positionJ);
+        public void InitializeData(int i, int j)
+        {
+            _data.SetData(i, j);
         }
 
         public void Dispose()

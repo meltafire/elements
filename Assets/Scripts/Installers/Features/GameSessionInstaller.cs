@@ -1,6 +1,7 @@
 ﻿using Elements.DataSource.Data;
 using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Controllers;
+using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
 using Elements.GameSession.Views;
@@ -32,16 +33,9 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<MovementHandler>().AsTransient();
             Container.BindInterfacesTo<DropHandler>().AsTransient();
             Container.BindInterfacesTo<DestroyHandler>().AsTransient();
-            Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
             Container.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
 
-            Container.BindFactory<int, int, PositionMediator, PositionMediatorFactory>();
             Container.BindFactory<ItemType, ItemMediator, ItemMediatorFactory>();
-
-            Container
-                .BindFactory<PositionView, PositionViewFactory>()
-                .FromComponentInNewPrefab(_position)
-                .UnderTransform(_playfieldItemsTransform);
 
             Container
                 .BindFactory<ItemView, FireItemViewFactory>()
@@ -52,6 +46,27 @@ namespace Elements.Installers.Features
                 .BindFactory<ItemView, WaterItemViewFactory>()
                 .FromComponentInNewPrefab(_waterPrefab)
                 .UnderTransform(_playfieldItemsTransform);
+
+            Container.BindInterfacesTo<PlayfieldSpawnerHelper>().FromSubContainerResolve().ByMethod(InstallPositions).AsTransient();
+        }
+
+        private void InstallPositions(DiContainer subContainer)
+        {
+            subContainer
+                .BindFactory<PositionView, PositionViewFactory>()
+                .FromComponentInNewPrefab(_position)
+                .UnderTransform(_playfieldItemsTransform);
+
+            subContainer.BindFactory<PositionMediator, PositionMediatorFactory>()
+                    .FromSubContainerResolve().ByMethod(InstallPosition).AsTransient();
+
+            subContainer.Bind<PlayfieldSpawnerHelper>().AsTransient();
+        }
+
+        private void InstallPosition(DiContainer subContainer)
+        {
+            subContainer.Bind<PositionMediator>().AsTransient();
+            subContainer.Bind<PositionData>().AsTransient();
         }
     }
 }

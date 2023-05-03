@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Elements.GameSession.Factories
 {
-    public class PositionMediatorFactory : PlaceholderFactory<int, int, PositionMediator>
+    public class PositionMediatorFactory : PlaceholderFactory<PositionMediator>
     {
     }
 }

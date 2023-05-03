@@ -2,13 +2,16 @@
 {
     public class PositionData
     {
-        public readonly int I;
-        public readonly int J;
+        private int _i;
+        private int _j;
 
-        public PositionData(int i, int j)
+        public int I => _i;
+        public int J => _j;
+
+        public void SetData(int i, int j)
         {
-            I = i;
-            J = j;
+            _i = i;
+            _j = j;
         }
     }
 }
