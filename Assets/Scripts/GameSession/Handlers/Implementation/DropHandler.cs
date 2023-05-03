@@ -51,7 +51,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var container = positionContainers[columnNumber, j];
                     if (!container.IsEmpty())
                     {
-                        interactedItems.Add(container.PositionMediator.Data);
+                        interactedItems.Add(container.PositionController.Data);
                     }
                 }
 

@@ -3,6 +3,7 @@ using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
+using Elements.GameSession.Positions;
 using System.Linq;
 
 namespace Elements.GameSession.Handlers.Implementation
@@ -12,20 +13,20 @@ namespace Elements.GameSession.Handlers.Implementation
         private readonly ILevelContainer _levelContainer;
         private readonly ILevelContainerFiller _levelContainerFiller;
         private readonly ILevelDataSourceProvider _dataSourceProvider;
-        private readonly PositionMediatorFactory _positionMediatorFactory;
+        private readonly PositionsFacade _positionsFacade;
         private readonly ItemMediatorFactory _itemMediatorFactory;
 
         public PlayfieldSpawnerHelper(
             ILevelContainer levelContainer,
             ILevelContainerFiller levelContainerFiller,
             ILevelDataSourceProvider dataSourceProvider,
-            PositionMediatorFactory positionMediatorFactory,
+            PositionsFacade positionsFacade,
             ItemMediatorFactory itemMediatorFactory)
         {
             _levelContainer = levelContainer;
             _levelContainerFiller = levelContainerFiller;
             _dataSourceProvider = dataSourceProvider;
-            _positionMediatorFactory = positionMediatorFactory;
+            _positionsFacade = positionsFacade;
             _itemMediatorFactory = itemMediatorFactory;
         }
 
@@ -40,12 +41,9 @@ namespace Elements.GameSession.Handlers.Implementation
             {
                 for (int j = 0; j < fieldSizeJ; j++)
                 {
-                    var mediator = _positionMediatorFactory.Create();
+                    var positionController = _positionsFacade.SpawnPosition(i, j);
 
-                    mediator.InitializeData(i, j);
-                    mediator.CreateView();
-
-                    itemContainers[i, j] = new PositionContainer(mediator);
+                    itemContainers[i, j] = new PositionContainer(positionController);
                 }
 
             }
@@ -56,7 +54,7 @@ namespace Elements.GameSession.Handlers.Implementation
 
                 var mediator = _itemMediatorFactory.Create(item.ItemType);
                 mediator.CreateView();
-                mediator.RegisterAtNewPosition(container.PositionMediator);
+                mediator.RegisterAtNewPosition(container.PositionController);
                 mediator.MoveToPositionImediately();
 
                 container.ItemMediator = mediator;
@@ -74,7 +72,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     container.ItemMediator.RemoveView();
                 }
 
-                container.PositionMediator.RemoveView();
+                container.PositionController.RemoveView();
             }
         }
     }

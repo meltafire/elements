@@ -107,7 +107,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var finalCoordinateI = _firstItemPositionData.I + 1;
                     if (finalCoordinateI < dimensionI)
                     {
-                        finalPositionData = positionContainers[finalCoordinateI, _firstItemPositionData.J].PositionMediator.Data;
+                        finalPositionData = positionContainers[finalCoordinateI, _firstItemPositionData.J].PositionController.Data;
                     }
                 }
                 else if (swipeAngle > 45 && swipeAngle <= 135)
@@ -116,7 +116,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var finalCoordinateJ = _firstItemPositionData.J + 1;
                     if (finalCoordinateJ < dimensionJ && !positionContainers[_firstItemPositionData.I, finalCoordinateJ].IsEmpty())
                     {
-                        finalPositionData = positionContainers[_firstItemPositionData.I, finalCoordinateJ].PositionMediator.Data;
+                        finalPositionData = positionContainers[_firstItemPositionData.I, finalCoordinateJ].PositionController.Data;
                     }
                 }
                 else if ((swipeAngle > 135 && swipeAngle <= 180) || (swipeAngle >= -180 && swipeAngle <= -135))
@@ -125,7 +125,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var finalCoordinateI = _firstItemPositionData.I - 1;
                     if (finalCoordinateI >= 0)
                     {
-                        finalPositionData = positionContainers[finalCoordinateI, _firstItemPositionData.J].PositionMediator.Data;
+                        finalPositionData = positionContainers[finalCoordinateI, _firstItemPositionData.J].PositionController.Data;
                     }
                 }
                 else if (swipeAngle < -45 && swipeAngle >= -135)
@@ -134,7 +134,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var finalCoordinateJ = _firstItemPositionData.J - 1;
                     if (finalCoordinateJ >= 0)
                     {
-                        finalPositionData = positionContainers[_firstItemPositionData.I, finalCoordinateJ].PositionMediator.Data;
+                        finalPositionData = positionContainers[_firstItemPositionData.I, finalCoordinateJ].PositionController.Data;
                     }
                 }
 

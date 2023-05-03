@@ -4,15 +4,15 @@ namespace Elements.GameSession.Containers.Implementation
 {
     public class PositionContainer : IPositionContainer
     {
-        private readonly IPositionMediator _positionMediator;
+        private readonly IPositionController _positionMediator;
 
         private IItemMediator _itemMediator;
 
-        public IPositionMediator PositionMediator => _positionMediator;
+        public IPositionController PositionController => _positionMediator;
 
         public IItemMediator ItemMediator { get => _itemMediator; set => _itemMediator = value; }
 
-        public PositionContainer(IPositionMediator PositionMediator)
+        public PositionContainer(IPositionController PositionMediator)
         {
             _positionMediator = PositionMediator;
         }

@@ -7,7 +7,7 @@ using System;
 
 namespace Elements.GameSession.Containers.Implementation
 {
-    public class PositionMediator : IPositionMediator, IDisposable
+    public class PositionController : IPositionController, IDisposable
     {
         private readonly PositionData _data;
         private readonly IPlayfiedPositioningHandler _positioningHandler;
@@ -20,7 +20,7 @@ namespace Elements.GameSession.Containers.Implementation
 
         public event Action<PositionData> OnItemClick;
 
-        public PositionMediator(
+        public PositionController(
             PositionViewFactory positionViewFactory,
             IPlayfiedPositioningHandler positioningHandler,
             PositionData data)

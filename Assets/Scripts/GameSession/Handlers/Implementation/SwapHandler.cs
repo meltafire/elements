@@ -41,7 +41,7 @@ namespace Elements.GameSession.Handlers.Implementation
         {
             if (!container.IsEmpty())
             {
-                container.ItemMediator.RegisterAtNewPosition(container.PositionMediator);
+                container.ItemMediator.RegisterAtNewPosition(container.PositionController);
             }
         }
     }

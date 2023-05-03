@@ -2,7 +2,7 @@
 {
     public interface IPositionContainer
     {
-        IPositionMediator PositionMediator { get;}
+        IPositionController PositionController { get;}
         IItemMediator ItemMediator { get; set; }
 
         bool IsEmpty();

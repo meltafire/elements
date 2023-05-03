@@ -50,7 +50,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     positionToClear.ItemMediator.RemoveView();
                     positionToClear.ItemMediator = null;
 
-                    _interactedItems.Add(positionToClear.PositionMediator.Data);
+                    _interactedItems.Add(positionToClear.PositionController.Data);
                 }
 
                 return _interactedItems;

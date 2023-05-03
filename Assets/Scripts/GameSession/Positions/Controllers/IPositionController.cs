@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Elements.GameSession.Containers.Infrastructure
 {
-    public interface IPositionMediator
+    public interface IPositionController
     {
         Vector3 Position { get; }
         PositionData Data { get; }

@@ -17,7 +17,7 @@ namespace Elements.GameSession.Containers.Implementation
         private readonly FireItemViewFactory _fireItemViewFactory;
 
         private ItemView _view;
-        private IPositionMediator _positionMediator;
+        private IPositionController _positionMediator;
 
         public event Action<PositionData> OnItemSelect;
 
@@ -41,7 +41,7 @@ namespace Elements.GameSession.Containers.Implementation
             }
         }
 
-        public void RegisterAtNewPosition(IPositionMediator positionMediator)
+        public void RegisterAtNewPosition(IPositionController positionMediator)
         {
             Unsubscribe();
 
