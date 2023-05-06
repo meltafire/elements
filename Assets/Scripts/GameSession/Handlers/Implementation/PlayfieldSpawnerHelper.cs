@@ -3,6 +3,7 @@ using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
+using Elements.GameSession.Items;
 using Elements.GameSession.Positions;
 using System.Linq;
 
@@ -14,20 +15,20 @@ namespace Elements.GameSession.Handlers.Implementation
         private readonly ILevelContainerFiller _levelContainerFiller;
         private readonly ILevelDataSourceProvider _dataSourceProvider;
         private readonly PositionsFacade _positionsFacade;
-        private readonly ItemMediatorFactory _itemMediatorFactory;
+        private readonly ItemsFacade _itemsFacade;
 
         public PlayfieldSpawnerHelper(
             ILevelContainer levelContainer,
             ILevelContainerFiller levelContainerFiller,
             ILevelDataSourceProvider dataSourceProvider,
             PositionsFacade positionsFacade,
-            ItemMediatorFactory itemMediatorFactory)
+            ItemsFacade itemsFacade)
         {
             _levelContainer = levelContainer;
             _levelContainerFiller = levelContainerFiller;
             _dataSourceProvider = dataSourceProvider;
             _positionsFacade = positionsFacade;
-            _itemMediatorFactory = itemMediatorFactory;
+            _itemsFacade = itemsFacade;
         }
 
         public void Spawn()
@@ -52,12 +53,12 @@ namespace Elements.GameSession.Handlers.Implementation
             {
                 var container = itemContainers[item.I, item.J];
 
-                var mediator = _itemMediatorFactory.Create(item.ItemType);
-                mediator.CreateView();
-                mediator.RegisterAtNewPosition(container.PositionController);
-                mediator.MoveToPositionImediately();
+                var controller = _itemsFacade.SpawnItem(item.ItemType);
 
-                container.ItemMediator = mediator;
+                controller.RegisterAtNewPosition(container.PositionController);
+                controller.MoveToPositionImediately();
+
+                container.ItemController = controller;
             }
 
             _levelContainerFiller.Fill(itemContainers, fieldSizeI, fieldSizeJ);
@@ -69,7 +70,7 @@ namespace Elements.GameSession.Handlers.Implementation
             {
                 if (!container.IsEmpty())
                 {
-                    container.ItemMediator.RemoveView();
+                    container.ItemController.RemoveView();
                 }
 
                 container.PositionController.RemoveView();

@@ -38,7 +38,7 @@ namespace Elements.GameSession.Handlers.Implementation
 
                 for (int i = 0; i < positionsToClearCount; i++)
                 {
-                    animationTasks[i] = positionsToClear[i].ItemMediator.PlayDestroyAnimation(token);
+                    animationTasks[i] = positionsToClear[i].ItemController.PlayDestroyAnimation(token);
                 }
 
                 await UniTask.WhenAll(animationTasks);
@@ -47,8 +47,8 @@ namespace Elements.GameSession.Handlers.Implementation
                 {
                     var positionToClear = positionsToClear[i];
 
-                    positionToClear.ItemMediator.RemoveView();
-                    positionToClear.ItemMediator = null;
+                    positionToClear.ItemController.RemoveView();
+                    positionToClear.ItemController = null;
 
                     _interactedItems.Add(positionToClear.PositionController.Data);
                 }
@@ -78,7 +78,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     }
                     else
                     {
-                        var encounteredItemType = positionContainer.ItemMediator.ItemType;
+                        var encounteredItemType = positionContainer.ItemController.ItemType;
 
                         if (encounteredItemType == lastEncounteredType)
                         {
@@ -123,7 +123,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     }
                     else
                     {
-                        var encounteredItemType = positionContainer.ItemMediator.ItemType;
+                        var encounteredItemType = positionContainer.ItemController.ItemType;
 
                         if (encounteredItemType == lastEncounteredType)
                         {

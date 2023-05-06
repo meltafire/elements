@@ -27,11 +27,11 @@ namespace Elements.GameSession.Handlers.Implementation
 
         public void Execute(IPositionContainer fromContainer, IPositionContainer toContainer)
         {
-            var fromItem = fromContainer.ItemMediator;
-            var toItem = toContainer.ItemMediator;
+            var fromItem = fromContainer.ItemController;
+            var toItem = toContainer.ItemController;
 
-            fromContainer.ItemMediator = toItem;
-            toContainer.ItemMediator = fromItem;
+            fromContainer.ItemController = toItem;
+            toContainer.ItemController = fromItem;
 
             RegisterAtNewPosition(fromContainer);
             RegisterAtNewPosition(toContainer);
@@ -41,7 +41,7 @@ namespace Elements.GameSession.Handlers.Implementation
         {
             if (!container.IsEmpty())
             {
-                container.ItemMediator.RegisterAtNewPosition(container.PositionController);
+                container.ItemController.RegisterAtNewPosition(container.PositionController);
             }
         }
     }

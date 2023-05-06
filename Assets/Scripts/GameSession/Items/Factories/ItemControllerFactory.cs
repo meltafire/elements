@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Elements.GameSession.Factories
 {
-    public class ItemMediatorFactory : PlaceholderFactory<ItemType, ItemMediator>
+    public class ItemControllerFactory : PlaceholderFactory<ItemType, ItemController>
     {
     }
 }

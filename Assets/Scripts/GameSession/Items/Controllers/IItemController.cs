@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Elements.GameSession.Containers.Infrastructure
 {
-    public interface IItemMediator
+    public interface IItemController
     {
         event Action<PositionData> OnItemSelect;
 

@@ -1,12 +1,9 @@
 {
-    "name": "Elements.GameSession",
+    "name": "Elements.GameSession.Items",
     "rootNamespace": "",
     "references": [
-        "Elements.DataSource",
         "Elements.DataSource.Data",
-        "Elements.GameSession.Items",
         "Elements.GameSession.Positions",
-        "Elements.Menu",
         "Elements.Tools",
         "UniTask",
         "Zenject"

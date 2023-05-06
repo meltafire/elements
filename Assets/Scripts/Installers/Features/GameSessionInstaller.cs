@@ -4,6 +4,7 @@ using Elements.GameSession.Controllers;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
+using Elements.GameSession.Items;
 using Elements.GameSession.Positions;
 using Elements.GameSession.Views;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace Elements.Installers.Features
         public override void InstallBindings()
         {
             Container.Bind<PositionsFacade>().FromSubContainerResolve().ByMethod(InstallPositions).AsTransient();
+            Container.Bind<ItemsFacade>().FromSubContainerResolve().ByMethod(InstallItems).AsTransient();
 
             Container.Bind<GameSessionController>().AsTransient();
 
@@ -38,18 +40,6 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<DestroyHandler>().AsTransient();
             Container.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
             Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
-
-            Container.BindFactory<ItemType, ItemMediator, ItemMediatorFactory>();
-
-            Container
-                .BindFactory<ItemView, FireItemViewFactory>()
-                .FromComponentInNewPrefab(_firePrefab)
-                .UnderTransform(_playfieldItemsTransform);
-
-            Container
-                .BindFactory<ItemView, WaterItemViewFactory>()
-                .FromComponentInNewPrefab(_waterPrefab)
-                .UnderTransform(_playfieldItemsTransform);
         }
 
         private void InstallPositions(DiContainer subContainer)
@@ -69,6 +59,38 @@ namespace Elements.Installers.Features
         {
             subContainer.Bind<PositionController>().AsTransient();
             subContainer.Bind<PositionData>().AsTransient();
+        }
+
+        private void InstallItems(DiContainer subContainer)
+        {
+            subContainer.Bind<ItemsFacade>().AsTransient();
+
+            subContainer
+                .BindFactory<PositionView, PositionViewFactory>()
+                .FromComponentInNewPrefab(_position)
+                .UnderTransform(_playfieldItemsTransform);
+
+            subContainer.BindFactory<PositionController, PositionControllerFactory>()
+                    .FromSubContainerResolve().ByMethod(InstallPosition).AsTransient();
+
+            subContainer
+                .BindFactory<ItemView, FireItemViewFactory>()
+                .FromComponentInNewPrefab(_firePrefab)
+                .UnderTransform(_playfieldItemsTransform);
+
+            subContainer
+                .BindFactory<ItemView, WaterItemViewFactory>()
+                .FromComponentInNewPrefab(_waterPrefab)
+                .UnderTransform(_playfieldItemsTransform);
+
+            subContainer.BindFactory<ItemType, ItemController, ItemControllerFactory>()
+                .FromSubContainerResolve().ByMethod(InstallItem).AsTransient();
+        }
+
+        private void InstallItem(DiContainer subContainer, ItemType itemType)
+        {
+            subContainer.Bind<ItemController>().AsTransient();
+            subContainer.BindInstance(itemType);
         }
     }
 }

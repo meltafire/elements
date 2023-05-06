@@ -2,7 +2,7 @@
 
 namespace Elements.GameSession.Data
 {
-    public class Item
+    public class ItemData
     {
         public ItemType ItemType;
         public int I;

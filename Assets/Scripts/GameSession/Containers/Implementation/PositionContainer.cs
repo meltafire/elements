@@ -6,11 +6,11 @@ namespace Elements.GameSession.Containers.Implementation
     {
         private readonly IPositionController _positionMediator;
 
-        private IItemMediator _itemMediator;
+        private IItemController _itemController;
 
         public IPositionController PositionController => _positionMediator;
 
-        public IItemMediator ItemMediator { get => _itemMediator; set => _itemMediator = value; }
+        public IItemController ItemController { get => _itemController; set => _itemController = value; }
 
         public PositionContainer(IPositionController PositionMediator)
         {
@@ -19,7 +19,7 @@ namespace Elements.GameSession.Containers.Implementation
 
         public bool IsEmpty()
         {
-            return _itemMediator == null;
+            return _itemController == null;
         }
     }
 }

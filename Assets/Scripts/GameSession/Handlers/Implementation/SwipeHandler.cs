@@ -35,7 +35,7 @@ namespace Elements.GameSession.Handlers.Implementation
                 {
                     if (!positionContainer.IsEmpty())
                     {
-                        positionContainer.ItemMediator.OnItemSelect += OnItemSelected;
+                        positionContainer.ItemController.OnItemSelect += OnItemSelected;
                     }
                 }
 
@@ -45,7 +45,7 @@ namespace Elements.GameSession.Handlers.Implementation
                 {
                     if (!positionContainer.IsEmpty())
                     {
-                        positionContainer.ItemMediator.OnItemSelect -= OnItemSelected;
+                        positionContainer.ItemController.OnItemSelect -= OnItemSelected;
                     }
                 }
 

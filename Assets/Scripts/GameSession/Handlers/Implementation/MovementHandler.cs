@@ -32,7 +32,7 @@ namespace Elements.GameSession.Handlers.Implementation
                     var container = containers[item.I, item.J];
                     if (!container.IsEmpty())
                     {
-                        _movementTasks.Add(containers[item.I, item.J].ItemMediator.MoveView(token));
+                        _movementTasks.Add(containers[item.I, item.J].ItemController.MoveView(token));
                     }
                 }
 

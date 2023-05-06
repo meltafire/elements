@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Elements.GameSession.Containers.Implementation
 {
-    public class ItemMediator : IItemMediator, IDisposable
+    public class ItemController : IItemController, IDisposable
     {
         private readonly ItemType _itemType;
         private readonly WaterItemViewFactory _waterItemViewFactory;
@@ -23,7 +23,7 @@ namespace Elements.GameSession.Containers.Implementation
 
         public ItemType ItemType => _itemType;
 
-        public ItemMediator(
+        public ItemController(
             ItemType itemType,
             WaterItemViewFactory waterItemViewFactory,
             FireItemViewFactory fireItemViewFactory)
