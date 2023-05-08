@@ -1,17 +1,13 @@
 {
-    "name": "Elements.Installers",
+    "name": "Elements.GameSession.LevelSession",
     "rootNamespace": "",
     "references": [
-        "Elements.Balloons",
-        "Elements.DataSource",
         "Elements.DataSource.Data",
-        "Elements.GameSession",
         "Elements.GameSession.Items",
-        "Elements.GameSession.LevelSession",
         "Elements.GameSession.Positions",
-        "Elements.Launcher",
+        "Elements.Tools",
         "Elements.Menu",
-        "Elements.PlayfieldScaler",
+        "UniTask",
         "Zenject"
     ],
     "includePlatforms": [],
