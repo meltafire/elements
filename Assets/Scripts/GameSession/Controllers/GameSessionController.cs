@@ -38,17 +38,11 @@ namespace Elements.GameSession.Controllers
 
                 _diContainer.Bind<ILevelDataSourceProvider>().FromInstance(level);
 
-                var levelContainer = new LevelContainer();
-                _diContainer.Bind<ILevelContainer>().FromInstance(levelContainer);
-                _diContainer.Bind<ILevelContainerFiller>().FromInstance(levelContainer);
-
                 var levelSessionController = _levelSessionControllerFactory.Create();
 
                 await levelSessionController.Execute(token);
 
                 _diContainer.Unbind<ILevelDataSourceProvider>();
-                _diContainer.Unbind<ILevelContainer>();
-                _diContainer.Unbind<ILevelContainerFiller>();
 
                 _gameSessionDataHandler.ItterateToNextLevel();
             }

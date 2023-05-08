@@ -1,5 +1,6 @@
 ﻿using Elements.DataSource.Data;
 using Elements.GameSession.Containers.Implementation;
+using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Controllers;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
@@ -30,17 +31,26 @@ namespace Elements.Installers.Features
             Container.Bind<ItemsFacade>().FromSubContainerResolve().ByMethod(InstallItems).AsTransient();
 
             Container.Bind<GameSessionController>().AsTransient();
-
-            Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>();
-
             Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
-            Container.BindInterfacesTo<SwipeHandler>().AsTransient();
-            Container.BindInterfacesTo<SwapHandler>().AsTransient();
-            Container.BindInterfacesTo<MovementHandler>().AsTransient();
-            Container.BindInterfacesTo<DropHandler>().AsTransient();
-            Container.BindInterfacesTo<DestroyHandler>().AsTransient();
-            Container.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
-            Container.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
+
+            Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>().FromSubContainerResolve().ByMethod(InstallLevelSession).AsTransient();
+        }
+
+        private void InstallLevelSession(DiContainer subContainer)
+        {
+            subContainer.Bind<LevelSessionController>().AsTransient();
+
+            subContainer.BindFactory<LevelSessionController, LevelSessionControllerFactory>();
+
+            subContainer.BindInterfacesTo<LevelContainer>().AsCached();
+
+            subContainer.BindInterfacesTo<SwipeHandler>().AsTransient();
+            subContainer.BindInterfacesTo<SwapHandler>().AsTransient();
+            subContainer.BindInterfacesTo<MovementHandler>().AsTransient();
+            subContainer.BindInterfacesTo<DropHandler>().AsTransient();
+            subContainer.BindInterfacesTo<DestroyHandler>().AsTransient();
+            subContainer.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
+            subContainer.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
         }
 
         private void InstallPositions(DiContainer subContainer)
