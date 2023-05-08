@@ -4,6 +4,7 @@ using Elements.GameSession.Controllers;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
+using Elements.GameSession.Handlers.Infrastructure;
 using Elements.GameSession.Items;
 using Elements.GameSession.Positions;
 using Elements.GameSession.Views;
@@ -44,6 +45,8 @@ namespace Elements.Installers.Features
 
         private void InstallPositions(DiContainer subContainer)
         {
+            subContainer.Bind<IPlayfiedPositioningHandler>().To<PlayfiedPositioningHandler>().AsCached();
+
             subContainer.Bind<PositionsFacade>().AsTransient();
 
             subContainer
