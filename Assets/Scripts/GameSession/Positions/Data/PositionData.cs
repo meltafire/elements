@@ -1,4 +1,4 @@
-﻿namespace Elements.GameSession.Data
+﻿namespace Elements.GameSession.Positions.Data
 {
     public class PositionData
     {

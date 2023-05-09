@@ -1,4 +1,6 @@
-﻿namespace Elements.GameSession.Data
+﻿using Elements.GameSession.Positions.Data;
+
+namespace Elements.GameSession.Data
 {
     public class SwapData
     {

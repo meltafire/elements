@@ -1,7 +1,7 @@
-﻿using Elements.GameSession.Containers.Implementation;
+﻿using Elements.GameSession.Positions.Controllers;
 using Zenject;
 
-namespace Elements.GameSession.Factories
+namespace Elements.GameSession.Positions.Factories
 {
     public class PositionControllerFactory : PlaceholderFactory<PositionController>
     {

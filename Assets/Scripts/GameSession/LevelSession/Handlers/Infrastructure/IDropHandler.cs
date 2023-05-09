@@ -1,4 +1,4 @@
-﻿using Elements.GameSession.Data;
+﻿using Elements.GameSession.Positions.Data;
 using System.Collections.Generic;
 
 namespace Elements.GameSession.Handlers.Infrastructure

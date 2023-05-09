@@ -1,8 +1,7 @@
-﻿using Elements.GameSession.Data;
-using Elements.GameSession.Handlers.Infrastructure;
+﻿using Elements.GameSession.Positions.Data;
 using UnityEngine;
 
-namespace Elements.GameSession.Handlers.Implementation
+namespace Elements.GameSession.Positions.Handlers
 {
     public class PlayfiedPositioningHandler : IPlayfiedPositioningHandler
     {

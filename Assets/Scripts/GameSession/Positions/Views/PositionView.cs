@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Elements.GameSession.Views
+namespace Elements.GameSession.Positions.Views
 {
     public class PositionView : MonoBehaviour
     {

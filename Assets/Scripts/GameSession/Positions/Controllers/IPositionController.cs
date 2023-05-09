@@ -1,8 +1,8 @@
-﻿using Elements.GameSession.Data;
+﻿using Elements.GameSession.Positions.Data;
 using System;
 using UnityEngine;
 
-namespace Elements.GameSession.Containers.Infrastructure
+namespace Elements.GameSession.Positions.Controllers
 {
     public interface IPositionController
     {

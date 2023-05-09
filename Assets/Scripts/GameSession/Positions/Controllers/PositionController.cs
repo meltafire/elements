@@ -1,12 +1,11 @@
-﻿using Elements.GameSession.Containers.Infrastructure;
-using Elements.GameSession.Data;
-using Elements.GameSession.Factories;
-using Elements.GameSession.Handlers.Infrastructure;
-using Elements.GameSession.LevelProvider;
-using Elements.GameSession.Views;
+﻿using Elements.GameSession.LevelProvider;
+using Elements.GameSession.Positions.Data;
+using Elements.GameSession.Positions.Factories;
+using Elements.GameSession.Positions.Handlers;
+using Elements.GameSession.Positions.Views;
 using System;
 
-namespace Elements.GameSession.Containers.Implementation
+namespace Elements.GameSession.Positions.Controllers
 {
     public class PositionController : IPositionController, IDisposable
     {

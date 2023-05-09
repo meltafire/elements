@@ -1,4 +1,6 @@
-﻿namespace Elements.GameSession.Containers.Infrastructure
+﻿using Elements.GameSession.Positions.Controllers;
+
+namespace Elements.GameSession.Containers.Infrastructure
 {
     public interface IPositionContainer
     {
