@@ -1,12 +1,12 @@
 ﻿using Elements.DataSource.Data;
 using Elements.GameSession.Containers.Implementation;
-using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Controllers;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
 using Elements.GameSession.Handlers.Infrastructure;
 using Elements.GameSession.Items;
+using Elements.GameSession.LevelProvider;
 using Elements.GameSession.Positions;
 using Elements.GameSession.Views;
 using UnityEngine;
@@ -27,11 +27,8 @@ namespace Elements.Installers.Features
 
         public override void InstallBindings()
         {
-            Container.Bind<PositionsFacade>().FromSubContainerResolve().ByMethod(InstallPositions).AsTransient();
-            Container.Bind<ItemsFacade>().FromSubContainerResolve().ByMethod(InstallItems).AsTransient();
-
             Container.Bind<GameSessionController>().AsTransient();
-            Container.BindInterfacesTo<GameSessionDataHandler>().AsTransient();
+            Container.BindInterfacesTo<GameSessionDataHandler>().AsCached();
 
             Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>().FromSubContainerResolve().ByMethod(InstallLevelSession).AsTransient();
         }
@@ -44,6 +41,7 @@ namespace Elements.Installers.Features
 
             subContainer.BindInterfacesTo<LevelContainer>().AsCached();
 
+            subContainer.BindInterfacesTo<LevelDataProvider>().AsTransient();
             subContainer.BindInterfacesTo<SwipeHandler>().AsTransient();
             subContainer.BindInterfacesTo<SwapHandler>().AsTransient();
             subContainer.BindInterfacesTo<MovementHandler>().AsTransient();
@@ -51,6 +49,9 @@ namespace Elements.Installers.Features
             subContainer.BindInterfacesTo<DestroyHandler>().AsTransient();
             subContainer.BindInterfacesTo<GameEndRulesHandler>().AsTransient();
             subContainer.BindInterfacesTo<PlayfieldSpawnerHelper>().AsTransient();
+
+            subContainer.Bind<PositionsFacade>().FromSubContainerResolve().ByMethod(InstallPositions).AsTransient();
+            subContainer.Bind<ItemsFacade>().FromSubContainerResolve().ByMethod(InstallItems).AsTransient();
         }
 
         private void InstallPositions(DiContainer subContainer)

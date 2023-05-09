@@ -7,6 +7,8 @@
         "Elements.DataSource.Data",
         "Elements.GameSession",
         "Elements.GameSession.Items",
+        "Elements.GameSession.LevelCounter",
+        "Elements.GameSession.LevelProvider",
         "Elements.GameSession.LevelSession",
         "Elements.GameSession.Positions",
         "Elements.Launcher",

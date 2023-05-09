@@ -1,8 +1,8 @@
-﻿using Elements.DataSource.Data;
-using Elements.GameSession.Containers.Infrastructure;
+﻿using Elements.GameSession.Containers.Infrastructure;
 using Elements.GameSession.Data;
 using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
+using Elements.GameSession.LevelProvider;
 using Elements.GameSession.Views;
 using System;
 
@@ -13,7 +13,7 @@ namespace Elements.GameSession.Containers.Implementation
         private readonly PositionData _data;
         private readonly IPlayfiedPositioningHandler _positioningHandler;
         private readonly PositionViewFactory _positionViewFactory;
-        private readonly ILevelDataSourceProvider _levelDataSourceProvider;
+        private readonly ILevelDataProvider _levelDataSourceProvider;
 
         private PositionView _view;
 
@@ -26,7 +26,7 @@ namespace Elements.GameSession.Containers.Implementation
             PositionViewFactory positionViewFactory,
             IPlayfiedPositioningHandler positioningHandler,
             PositionData data,
-            ILevelDataSourceProvider levelDataSourceProvider)
+            ILevelDataProvider levelDataSourceProvider)
         {
             _positionViewFactory = positionViewFactory;
             _positioningHandler = positioningHandler;

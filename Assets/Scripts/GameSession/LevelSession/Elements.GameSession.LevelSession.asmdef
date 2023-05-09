@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "Elements.DataSource.Data",
+        "Elements.GameSession.LevelProvider",
         "Elements.GameSession.Items",
         "Elements.GameSession.Positions",
         "Elements.Tools",

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Elements.DataSource
 {
     [CreateAssetMenu(fileName = "Level", menuName = "elements game/Level", order = 1)]
-    public class Level : ScriptableObject, ILevelDataSourceProvider
+    public class Level : ScriptableObject
     {
         [SerializeField]
         private int _fieldSizeI;

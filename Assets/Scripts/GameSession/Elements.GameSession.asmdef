@@ -2,8 +2,7 @@
     "name": "Elements.GameSession",
     "rootNamespace": "",
     "references": [
-        "Elements.DataSource",
-        "Elements.DataSource.Data",
+        "Elements.GameSession.LevelCounter",
         "Elements.GameSession.LevelSession",
         "UniTask",
         "Zenject"

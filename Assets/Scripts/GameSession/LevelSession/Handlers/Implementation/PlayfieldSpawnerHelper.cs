@@ -1,9 +1,8 @@
-﻿using Elements.DataSource.Data;
-using Elements.GameSession.Containers.Implementation;
+﻿using Elements.GameSession.Containers.Implementation;
 using Elements.GameSession.Containers.Infrastructure;
-using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
 using Elements.GameSession.Items;
+using Elements.GameSession.LevelProvider;
 using Elements.GameSession.Positions;
 using System.Linq;
 
@@ -13,14 +12,14 @@ namespace Elements.GameSession.Handlers.Implementation
     {
         private readonly ILevelContainer _levelContainer;
         private readonly ILevelContainerFiller _levelContainerFiller;
-        private readonly ILevelDataSourceProvider _dataSourceProvider;
+        private readonly ILevelDataProvider _dataSourceProvider;
         private readonly PositionsFacade _positionsFacade;
         private readonly ItemsFacade _itemsFacade;
 
         public PlayfieldSpawnerHelper(
             ILevelContainer levelContainer,
             ILevelContainerFiller levelContainerFiller,
-            ILevelDataSourceProvider dataSourceProvider,
+            ILevelDataProvider dataSourceProvider,
             PositionsFacade positionsFacade,
             ItemsFacade itemsFacade)
         {

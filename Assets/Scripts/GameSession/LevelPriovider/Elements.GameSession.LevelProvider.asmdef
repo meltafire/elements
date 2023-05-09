@@ -1,11 +1,10 @@
 {
-    "name": "Elements.GameSession.Positions",
+    "name": "Elements.GameSession.LevelProvider",
     "rootNamespace": "",
     "references": [
-        "Elements.GameSession.LevelProvider",
-        "Elements.DataSource.Data",
-        "UniTask",
-        "Zenject"
+        "Elements.GameSession.LevelCounter",
+        "Elements.DataSource",
+        "Elements.DataSource.Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
