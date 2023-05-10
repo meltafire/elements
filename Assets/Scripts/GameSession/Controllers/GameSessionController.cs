@@ -1,20 +1,20 @@
 ﻿using Cysharp.Threading.Tasks;
-using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Infrastructure;
+using Elements.GameSession.LevelSession.Factories;
 using System.Threading;
 
 namespace Elements.GameSession.Controllers
 {
     public class GameSessionController
     {
-        private readonly LevelSessionControllerFactory _levelSessionControllerFactory;
+        private readonly LevelSessionFacadeFactory _levelSessionFacadeFactory;
         private readonly IGameSessionDataHandler _gameSessionDataHandler;
 
         public GameSessionController(
-            LevelSessionControllerFactory levelSessionControllerFactory,
+            LevelSessionFacadeFactory levelSessionFacadeFactory,
             IGameSessionDataHandler gameSessionDataHandler)
         {
-            _levelSessionControllerFactory = levelSessionControllerFactory;
+            _levelSessionFacadeFactory = levelSessionFacadeFactory;
             _gameSessionDataHandler = gameSessionDataHandler;
         }
 
@@ -22,7 +22,7 @@ namespace Elements.GameSession.Controllers
         {
             while (!token.IsCancellationRequested)
             {
-                var levelSessionController = _levelSessionControllerFactory.Create();
+                var levelSessionController = _levelSessionFacadeFactory.Create();
 
                 await levelSessionController.Execute(token);
 

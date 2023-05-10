@@ -5,6 +5,11 @@ using Elements.GameSession.Factories;
 using Elements.GameSession.Handlers.Implementation;
 using Elements.GameSession.Items;
 using Elements.GameSession.LevelProvider;
+using Elements.GameSession.LevelSession;
+using Elements.GameSession.LevelSession.Controllers;
+using Elements.GameSession.LevelSession.Controllers.States.Implementation;
+using Elements.GameSession.LevelSession.Controllers.States.Infrastructure;
+using Elements.GameSession.LevelSession.Factories;
 using Elements.GameSession.Positions;
 using Elements.GameSession.Positions.Controllers;
 using Elements.GameSession.Positions.Data;
@@ -33,16 +38,22 @@ namespace Elements.Installers.Features
             Container.Bind<GameSessionController>().AsTransient();
             Container.BindInterfacesTo<GameSessionDataHandler>().AsCached();
 
-            Container.BindFactory<LevelSessionController, LevelSessionControllerFactory>().FromSubContainerResolve().ByMethod(InstallLevelSession).AsTransient();
+            Container.BindFactory<LevelSessionFacade, LevelSessionFacadeFactory>().FromSubContainerResolve().ByMethod(InstallLevelSession).AsTransient();
         }
 
         private void InstallLevelSession(DiContainer subContainer)
         {
-            subContainer.Bind<LevelSessionController>().AsTransient();
+            subContainer.Bind<LevelSessionFacade>().AsTransient();
 
-            subContainer.BindFactory<LevelSessionController, LevelSessionControllerFactory>();
+            subContainer.BindFactory<LevelSessionFacade, LevelSessionFacadeFactory>();
+            subContainer.BindFactory<LevelSessionSpawnState, LevelSessionSpawnStateFactory>();
 
             subContainer.BindInterfacesTo<LevelContainer>().AsCached();
+            subContainer.Bind<LevelSessionController>().AsCached();
+
+            subContainer.Bind<LevelSessionSpawnState>().AsTransient();
+            subContainer.Bind<LevelSessionPlayState>().AsTransient();
+            subContainer.Bind<LevelSessionDespawnState>().AsTransient();
 
             subContainer.BindInterfacesTo<LevelDataProvider>().AsTransient();
             subContainer.BindInterfacesTo<SwipeHandler>().AsTransient();
