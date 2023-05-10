@@ -59,7 +59,7 @@ namespace Elements.GameSession.Positions.Controllers
         {
             if (_view != null)
             {
-                _view.Remove();
+                _view.Dispose();
             }
         }
 

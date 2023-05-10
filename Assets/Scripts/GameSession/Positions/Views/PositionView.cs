@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Elements.GameSession.Positions.Views
 {
-    public class PositionView : MonoBehaviour
+    public class PositionView : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {
         public event Action OnClick;
 
         public Vector3 Position => transform.position;
+
+        private IMemoryPool _pool;
 
         private void OnMouseDown()
         {
@@ -19,9 +22,19 @@ namespace Elements.GameSession.Positions.Views
             transform.localPosition = position;
         }
 
-        public void Remove()
+        public void OnDespawned()
         {
-            Destroy(gameObject);
+            _pool = null;
+        }
+
+        public void OnSpawned(IMemoryPool pool)
+        {
+            _pool = pool;
+        }
+
+        public void Dispose()
+        {
+            _pool.Despawn(this);
         }
     }
 }

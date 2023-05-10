@@ -16,10 +16,7 @@ namespace Elements.GameSession.LevelSession.Controllers.States.Implementation
 
         public UniTask Execute(LevelSessionController contextController, CancellationToken token)
         {
-            if (!token.IsCancellationRequested)
-            {
-                DespawnPlayfield();
-            }
+            DespawnPlayfield();
 
             contextController.ChangeState(null);
 

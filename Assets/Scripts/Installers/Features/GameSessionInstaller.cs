@@ -8,7 +8,6 @@ using Elements.GameSession.LevelProvider;
 using Elements.GameSession.LevelSession;
 using Elements.GameSession.LevelSession.Controllers;
 using Elements.GameSession.LevelSession.Controllers.States.Implementation;
-using Elements.GameSession.LevelSession.Controllers.States.Infrastructure;
 using Elements.GameSession.LevelSession.Factories;
 using Elements.GameSession.Positions;
 using Elements.GameSession.Positions.Controllers;
@@ -32,6 +31,12 @@ namespace Elements.Installers.Features
         private GameObject _firePrefab;
         [SerializeField]
         private GameObject _waterPrefab;
+        [SerializeField]
+        private int _positionPrefabPoolCount = 20;
+        [SerializeField]
+        private int _firePrefabPoolCount = 20;
+        [SerializeField]
+        private int _waterPrefabPoolCount = 20;
 
         public override void InstallBindings()
         {
@@ -39,6 +44,30 @@ namespace Elements.Installers.Features
             Container.BindInterfacesTo<GameSessionDataHandler>().AsCached();
 
             Container.BindFactory<LevelSessionFacade, LevelSessionFacadeFactory>().FromSubContainerResolve().ByMethod(InstallLevelSession).AsTransient();
+
+            Container
+                .BindFactory<ItemView, FireItemViewFactory>()
+                .FromMonoPoolableMemoryPool(
+                     x => x
+                        .WithInitialSize(_firePrefabPoolCount)
+                        .FromComponentInNewPrefab(_firePrefab)
+                        .UnderTransform(_playfieldItemsTransform));
+
+            Container
+                .BindFactory<ItemView, WaterItemViewFactory>()
+                .FromMonoPoolableMemoryPool(
+                    x => x
+                        .WithInitialSize(_waterPrefabPoolCount)
+                        .FromComponentInNewPrefab(_waterPrefab)
+                        .UnderTransform(_playfieldItemsTransform));
+
+            Container
+                .BindFactory<PositionView, PositionViewFactory>()
+                .FromMonoPoolableMemoryPool(
+                    x => x
+                        .WithInitialSize(_positionPrefabPoolCount)
+                        .FromComponentInNewPrefab(_position)
+                        .UnderTransform(_playfieldItemsTransform));
         }
 
         private void InstallLevelSession(DiContainer subContainer)
@@ -74,11 +103,6 @@ namespace Elements.Installers.Features
 
             subContainer.Bind<PositionsFacade>().AsTransient();
 
-            subContainer
-                .BindFactory<PositionView, PositionViewFactory>()
-                .FromComponentInNewPrefab(_position)
-                .UnderTransform(_playfieldItemsTransform);
-
             subContainer.BindFactory<PositionController, PositionControllerFactory>()
                     .FromSubContainerResolve().ByMethod(InstallPosition).AsTransient();
         }
@@ -100,16 +124,6 @@ namespace Elements.Installers.Features
 
             subContainer.BindFactory<PositionController, PositionControllerFactory>()
                     .FromSubContainerResolve().ByMethod(InstallPosition).AsTransient();
-
-            subContainer
-                .BindFactory<ItemView, FireItemViewFactory>()
-                .FromComponentInNewPrefab(_firePrefab)
-                .UnderTransform(_playfieldItemsTransform);
-
-            subContainer
-                .BindFactory<ItemView, WaterItemViewFactory>()
-                .FromComponentInNewPrefab(_waterPrefab)
-                .UnderTransform(_playfieldItemsTransform);
 
             subContainer.BindFactory<ItemType, ItemController, ItemControllerFactory>()
                 .FromSubContainerResolve().ByMethod(InstallItem).AsTransient();

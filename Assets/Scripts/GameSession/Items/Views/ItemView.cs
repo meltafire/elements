@@ -1,10 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Threading;
 using UnityEngine;
+using Zenject;
 
 namespace Elements.GameSession.Views
 {
-    public class ItemView : MonoBehaviour
+    public class ItemView : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {
         [SerializeField]
         private Animator _animator;
@@ -14,6 +16,7 @@ namespace Elements.GameSession.Views
         private bool _isMovementRequired = false;
         private Vector3 _movementTarget;
         private float _speed;
+        private IMemoryPool _pool;
 
         private void Update()
         {
@@ -39,11 +42,6 @@ namespace Elements.GameSession.Views
             _animator.SetTrigger(trigger);
         }
 
-        public void Remove()
-        {
-            Destroy(gameObject);
-        }
-
         public void SetPosition(Vector3 position)
         {
             transform.position = position;
@@ -52,6 +50,21 @@ namespace Elements.GameSession.Views
         private bool CheckMovementCondition()
         {
             return transform.position == _movementTarget;
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
+
+        public void OnSpawned(IMemoryPool pool)
+        {
+            _pool = pool;
+        }
+
+        public void Dispose()
+        {
+            _pool.Despawn(this);
         }
     }
 }

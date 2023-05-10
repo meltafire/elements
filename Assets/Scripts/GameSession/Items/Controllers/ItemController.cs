@@ -74,7 +74,7 @@ namespace Elements.GameSession.Containers.Implementation
         {
             if (_view != null)
             {
-                _view.Remove();
+                _view.Dispose();
             }
         }
 
@@ -83,6 +83,7 @@ namespace Elements.GameSession.Containers.Implementation
             if (_view != null)
             {
                 Unsubscribe();
+                _view.Dispose();
             }
         }
 
